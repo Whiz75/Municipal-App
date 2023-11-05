@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dcdcdc"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:gravity="center_vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/materialCardView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:layout_marginEnd="@dimen/standard_dp"
+        android:layout_marginStart="@dimen/standard_dp"
+        app:cardCornerRadius="@dimen/standard_dp"
+        android:background="@color/white"
+        app:cardBackgroundColor="@color/deep_sky_blue">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginEnd="@dimen/five_dp"
+            android:text="@string/online_text"
+            android:textStyle="bold"
+            android:textColor="@color/forest_green"
+            android:textAllCaps="true"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:layout_gravity="end"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Refractored.Controls.CircleImageView
+                android:id="@+id/user_picture"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                tools:src="@drawable/icon_user"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/username_txt"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="#2a2929"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintStart_toEndOf="@+id/postProfilePic"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/TextViewProfileRole"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/standard_dp"
+                    android:text="@string/role_txt"
+                    android:textSize="16sp"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-condensed"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/standard_dp"
+                    android:text="@string/date_txt"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    app:layout_constraintStart_toEndOf="@+id/postProfilePic"
+                    android:accessibilityHeading="@+id/postUsername" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:layout_marginEnd="@dimen/standard_dp"
+        android:layout_marginStart="@dimen/standard_dp"
+        android:layout_marginTop="@dimen/standard_dp"
+        app:cardCornerRadius="@dimen/standard_dp"
+        android:background="@color/white"
+        android:layout_below="@+id/materialCardView1"
+        android:layout_centerInParent="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/ten_dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/firstname_txt"
+                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/InputProfileFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fiften_dp"
+                    android:text="@string/Lastname_txt"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/InputProfileLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fiften_dp"
+                    android:text="@string/email_txt"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/InputProfileEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fiften_dp"
+                    android:text="@string/role_txt"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/InputProfileRole"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/BtnProfileUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fiften_dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="update"
+                    style="@style/ThemeOverlay.Material3.Button.ElevatedButton"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

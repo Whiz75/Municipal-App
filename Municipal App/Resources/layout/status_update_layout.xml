@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
+    
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"
+        android:src="@drawable/mtrl_ic_cancel"
+        android:tint="@android:color/black"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="UPDATE YOUR STATUS"
+        android:textStyle="bold"
+        android:layout_below="@+id/img_cancel"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/tv_label">
+
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/in_progress_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/In_progress_text"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/on_hold_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/on_hold_text"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/completed_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/completed_text"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/not_started_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Not_started_text"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/canceled_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/canceled_text"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/under_review_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/under_review_text"/>
+        </RadioGroup>
+    </com.google.android.material.card.MaterialCardView>
+
+     <com.google.android.material.button.MaterialButton
+        android:id="@+id/BtnReviewIncident"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/ten_dp"
+        android:text="UPDATE"
+        style="@style/Widget.Material3.Button"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/materialCardView1"/>
+</RelativeLayout>

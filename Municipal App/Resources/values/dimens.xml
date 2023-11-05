@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<dimen name="default_corner_radii">16dp</dimen>
+	<dimen name="title_padding">8dp</dimen>
+	<dimen name="standard_dp">8dp</dimen>
+	<dimen name="internal_padding">10dp</dimen>
+	<dimen name="five_dp">5dp</dimen>
+	<dimen name="ten_dp">10dp</dimen>
+	<dimen name="fiften_dp">15dp</dimen>
+	<dimen name="twenty_dp">20dp</dimen>
+	<dimen name="twenty_five_dp">25dp</dimen>
+	<dimen name="thirty_dp">30dp</dimen>
+	
+	<dimen name="ten_sp">10dp</dimen>
+	<dimen name="twenty_sp">20dp</dimen>
+	
+	
+	
+</resources>

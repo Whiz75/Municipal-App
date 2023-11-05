@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Municipal_App</string>
+    <string name="action_settings">Settings</string>
+
+	<!--login/register-->
+	<string name="firstname_txt">Firstname</string>
+	<string name="Lastname_txt">Lastname</string>
+	<string name="email_txt">Email Address</string>
+	<string name="phone_number_txt">Phone number</string>
+	<string name="Password_txt">Password</string>
+	<string name="role_txt">Role</string>
+	<string name="confirm_password_txt">Confirm Password</string>
+	<string name="reset_password_txt">reset password</string>
+	<string name="sign_in_txt">sign in</string>
+	<string name="sign_up_txt">sign up</string>
+	<string name="new_user_question_txt">New User?</string>
+	<string name="already_have_an_question_txt">Already have an account?</string>
+
+	<string name="enter_incident_type_txt">Enter incident type</string>
+	<string name="add_incident_type">Add Incident Type</string>
+
+	<string name="nav_home">Home</string>
+	<string name="nav_history">History</string>
+	<string name="nav_profile">Profile</string>
+
+	<!--incident dialog-->
+	<string name="username_txt">username</string>
+	<string name="date_txt">2023/09/17</string>
+	<string name="type_txt">Type of incident</string>
+	<string name="description_txt">comment or description</string>
+	<string name="coordinates_txt">coordinates</string>
+	<string name="severity_txt">severity</string>
+	<string name="status_txt">status</string>
+	<string name="add_comment_txt">add comment</string>
+
+	<string name="searchbar_hint">search incident</string>
+	<string name="yes_text">Yes</string>
+	<string name="no_text">No</string>
+	<string name="sign_out_text">Sign out</string>
+	<string name="sign_out_question_text">Are you sure you want to sign out?</string>
+	<string name="change_status_text">change status</string>
+
+	<!--statuses-->
+	<string name="In_progress_text">In Progress</string>
+	<string name="Not_started_text">Not Started</string>
+	<string name="canceled_text">Canceled</string>
+	<string name="on_hold_text">On Hold</string>
+	<string name="under_review_text">Under Review</string>
+	<string name="completed_text">Completed</string>
+	<string name="online_text">Online</string>
+	<string name="settings_text">Settings</string>
+	<string name="where_you_question_text">Where are you?</string>
+	<string name="location_disabled_text">Please enable your location so we can navigate to the damage site</string>
+
+</resources>

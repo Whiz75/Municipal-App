@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    style="?attr/materialCardViewElevatedStyle">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="end">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_close_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mtrl_ic_cancel"
+            android:tint="@android:color/black"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/five_dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginEnd="@dimen/five_dp"
+            android:text="@string/status_txt"
+            android:textSize="10sp"
+            android:fontFamily="sans-serif-smallcaps"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_picture"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/icon_user"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/username_txt"
+                    android:fontFamily="sans-serif"
+                    android:textColor="#2a2929"
+                    android:textStyle="normal"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintStart_toEndOf="@+id/postProfilePic"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/date_txt"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    app:layout_constraintStart_toEndOf="@+id/postProfilePic"
+                    android:accessibilityHeading="@+id/postUsername" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="204dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="@dimen/five_dp"
+            android:layout_marginEnd="@dimen/five_dp"
+            android:layout_marginBottom="2dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="6dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/type_txt"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-smallcaps"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description_txt"
+                android:fontFamily="sans-serif-smallcaps"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/coordinates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/coordinates_txt"
+                android:fontFamily="serif-monospace"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/BtnChangeStatus"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:elevation="@dimen/five_dp"
+                android:text="@string/change_status_text"
+                android:textAllCaps="true"
+                android:layout_gravity="end"
+                style="@style/Widget.Material3.Button"
+                android:layout_weight="0.5"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/BtnLocation"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:elevation="@dimen/five_dp"
+                android:text="LOCATION"
+                android:textAllCaps="true"
+                android:layout_gravity="end"
+                style="@style/Widget.Material3.Button"
+                android:layout_weight="0.5"/>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
