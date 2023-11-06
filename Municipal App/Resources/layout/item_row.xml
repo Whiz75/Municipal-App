@@ -6,11 +6,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#dcdcdc"
+    android:background="@color/gray"
     android:paddingBottom="5dp"
     android:paddingTop="5dp">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
@@ -24,6 +24,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date_txt"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif-smallcaps" 
+                android:layout_marginEnd="@dimen/five_dp"
+                android:layout_marginTop="@dimen/five_dp"
+                android:layout_marginBottom="@dimen/five_dp"
+                android:layout_gravity="end"/>
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img"
                 android:layout_width="match_parent"
@@ -34,7 +46,7 @@
                 android:layout_height="2dp"
                 app:dividerInsetStart="16dp"
                 app:dividerInsetEnd="16dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="2dp"/>
 
             <LinearLayout
@@ -59,12 +71,12 @@
                         android:layout_marginStart="@dimen/five_dp"/>
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/date"
+                        android:id="@+id/status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/date_txt"
+                        android:text="@string/status_txt"
                         android:textSize="12sp"
-                        android:fontFamily="sans-serif-smallcaps" 
+                        android:fontFamily="sans-serif-smallcaps"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/five_dp"/>
                 </RelativeLayout>
@@ -98,5 +110,5 @@
                 style="@style/Widget.Material3.Button"
                 android:layout_gravity="end"/>
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

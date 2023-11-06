@@ -48,12 +48,28 @@ namespace Municipal_App.Adapters
             vh.severity.Text = incident.Severity;
             vh.date.Text = incident.DateReported.ToString();
             vh.description.Text = incident.Description;
-            //vh.status.Text = incident.Coordinates.Latitude;
+            vh.status.Text = incident.Status;
+
+            //handle incident status colors
+            if (incident.Status == "PENDING")
+            {
+                //red
+                vh.status.SetTextColor(Android.Graphics.Color.ParseColor("#ffb74d"));
+            }
+            else if (incident.Status == "IN-PROGRESS")
+            {
+                //orange
+                vh.status.SetTextColor(Android.Graphics.Color.ParseColor("#4caf50"));
+
+            }
+            else if (incident.Status == "COMPLETED")
+            {
+                //green
+                vh.status.SetTextColor(Android.Graphics.Color.ParseColor("#e0e0e0"));
+            }
 
             vh.BtnReviewIncident.Click += delegate
             {
-                //DisplayIncidentOverviewFragment fragment = new DisplayIncidentOverviewFragment(incident.Id,incident.Coordinates.Latitude,incident.Coordinates.Longitude);
-                //fragment.Show(childFragmentManager.BeginTransaction(),"");
                 LocationDialogFragment location = new LocationDialogFragment(incident.Id, incident.Coordinates.Latitude,
                     incident.Coordinates.Longitude);
                 location.Show(childFragmentManager.BeginTransaction(), "");

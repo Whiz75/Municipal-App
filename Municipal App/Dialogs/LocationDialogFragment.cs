@@ -13,6 +13,8 @@ using Android.Widget;
 using AndroidHUD;
 using AndroidX.CardView.Widget;
 using AndroidX.Core.Content;
+using Firebase.Firestore.Auth;
+using Google.Android.Material.BottomSheet;
 using Google.Android.Material.Button;
 using Google.Android.Material.TextField;
 using Google.Android.Material.TextView;
@@ -24,20 +26,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DialogFragment = AndroidX.Fragment.App.DialogFragment;
+using User = Municipal_App.Models.User;
 
 namespace Municipal_App.Dialogs
 {
     public class LocationDialogFragment : DialogFragment, IOnMapReadyCallback
     {
         private Context context;
-        private CardView cardview1;
+        private CardView bottomSheetCardview1;
         private TextInputEditText txt_address;
         private TextInputEditText txt_dest_address;
+        private MaterialTextView reporterTv;
         private MaterialTextView EstDistanceTv;
+        private MaterialTextView TxtDuration;
         private MaterialButton BtnUpdateStatus;
         private SupportMapFragment mapFrag;
 
-        private string Id;
+        private readonly string Id;
         private double Lat;
         private double Lng;
 
@@ -57,16 +62,13 @@ namespace Municipal_App.Dialogs
 
             try
             {
-                // Fade out the view 
-                //alphaAnimation = new AlphaAnimation(1.0f, 0.0f);
-                //alphaAnimation.Duration = 3000;
+                // Calculate the screen height
+                int screenHeight = Resources.DisplayMetrics.HeightPixels;
 
-                //cardview1.StartAnimation(alphaAnimation);
-
-                slideAnimation = new TranslateAnimation(0, 0, 0, 200); // Slide view 200 pixels down
+                // Create a TranslateAnimation that moves the view from the bottom to the top
+                TranslateAnimation slideAnimation = new TranslateAnimation(0, 0, screenHeight, 0);
                 slideAnimation.Duration = 2000; // Duration of the animation in milliseconds
-                cardview1.StartAnimation(slideAnimation); // Start the animation
-
+                bottomSheetCardview1.StartAnimation(slideAnimation); // Start the animation
             }
             catch (Exception ex)
             {
@@ -88,6 +90,7 @@ namespace Municipal_App.Dialogs
             View view = inflater.Inflate(Resource.Layout.location_dialog_layout, container, false);
             Init(view);
             ChangeStatus();
+            GetUserInfo(Id);
 
             return view;
         }
@@ -95,10 +98,12 @@ namespace Municipal_App.Dialogs
         private void Init(View view)
         {
             context = view.Context;
-            cardview1 = view.FindViewById<CardView>(Resource.Id.cardview1);
+            bottomSheetCardview1 = view.FindViewById<CardView>(Resource.Id.cardview1);
             txt_address = view.FindViewById<TextInputEditText>(Resource.Id.txt_current_address);
             txt_dest_address = view.FindViewById<TextInputEditText>(Resource.Id.txt_dest_address);
+            reporterTv = view.FindViewById<MaterialTextView>(Resource.Id.reporterTv);
             EstDistanceTv = view.FindViewById<MaterialTextView>(Resource.Id.EstDistanceTv);
+            TxtDuration = view.FindViewById<MaterialTextView>(Resource.Id.TxtDuration);
             BtnUpdateStatus = view.FindViewById<MaterialButton>(Resource.Id.BtnUpdateStatus);
 
             mapFrag = ChildFragmentManager.FindFragmentById(Resource.Id.fragMap).JavaCast<SupportMapFragment>();
@@ -220,10 +225,6 @@ namespace Municipal_App.Dialogs
                     BtnUpdateStatus.Enabled = false;
                     BtnUpdateStatus.Text = "DISMISS";
                     BtnUpdateStatus.SetBackgroundColor(Android.Graphics.Color.ParseColor("#e0e0e0"));
-                    BtnUpdateStatus.Click += delegate
-                    {
-                        cardview1.Visibility = ViewStates.Gone;
-                    };
                     break;
             }
         }
@@ -250,7 +251,6 @@ namespace Municipal_App.Dialogs
         public   async void OnMapReady(GoogleMap googleMap)
         {
             this.googleMap = googleMap;
-
             try
             {
                 this.googleMap.UiSettings.ZoomControlsEnabled = true;
@@ -281,7 +281,6 @@ namespace Municipal_App.Dialogs
                     }
 
                     GetRoute(current, dest);
-                    //googleMap.CameraIdle += GoogleMap_CameraIdle;
                 }
             }
             catch (Exception ex)
@@ -304,74 +303,134 @@ namespace Municipal_App.Dialogs
         private double CalculatedTripDistance = 0.0;
         public async void GetRoute(OSRMLib.Helpers.Location startPos, OSRMLib.Helpers.Location endPos)
         {
-            //BtnContinue.Enabled = false;
-            //BtnContinue.Text = "PLEASE WAIT...";
             googleMap.Clear();
-            routeS.Coordinates = new List<OSRMLib.Helpers.Location> { startPos, endPos };
 
-            var response = await routeS.Call();
-
-            var points = response.Routes[0].Geometry;
-            Java.Util.ArrayList routeList = new Java.Util.ArrayList();
-            foreach (var point in points)
+            try
             {
-                routeList.Add(new LatLng(point.Latitude, point.Longitude));
+                routeS.Coordinates = new List<OSRMLib.Helpers.Location> { startPos, endPos };
+
+                var response = await routeS.Call();
+
+                var points = response.Routes[0].Geometry;
+                Java.Util.ArrayList routeList = new Java.Util.ArrayList();
+                foreach (var point in points)
+                {
+                    routeList.Add(new LatLng(point.Latitude, point.Longitude));
+                }
+                PolylineOptions polylineOptions = new PolylineOptions()
+                    .AddAll(routeList)
+                    .InvokeWidth(10)
+                    .InvokeColor(Resource.Color.material_blue_grey_800)
+                    .InvokeStartCap(new SquareCap())
+                    .InvokeEndCap(new SquareCap())
+                    .InvokeJointType(JointType.Round)
+                    .Geodesic(true);
+                googleMap.AddPolyline(polylineOptions);
+
+                LatLng firstpoint = new LatLng(startPos.Latitude, startPos.Longitude);
+                LatLng lastpoint = new LatLng(endPos.Latitude, endPos.Longitude);
+
+                //Pickup marker options
+                MarkerOptions pickupMarkerOptions = new MarkerOptions();
+                pickupMarkerOptions.SetPosition(firstpoint);
+                //pickupMarkerOptions.SetTitle("Pickup Location");
+
+                pickupMarkerOptions.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueGreen));
+
+
+                //Destination marker options
+                MarkerOptions destinationMarkerOptions = new MarkerOptions();
+                destinationMarkerOptions.SetPosition(lastpoint);
+                destinationMarkerOptions.SetTitle("Destination");
+                destinationMarkerOptions.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
+
+                Marker pickupMarker = googleMap.AddMarker(pickupMarkerOptions);
+
+                googleMap.AddMarker(destinationMarkerOptions);
+
+                double radiusDegrees = 0.10;
+                LatLng northEast = new LatLng(startPos.Latitude + radiusDegrees, startPos.Longitude + radiusDegrees);
+                LatLng southWest = new LatLng(endPos.Latitude - radiusDegrees, endPos.Longitude - radiusDegrees);
+                LatLngBounds bounds = new LatLngBounds(southWest, northEast);
+                googleMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(firstpoint, 15));
+                googleMap.SetPadding(40, 100, 40, 70);
+                pickupMarker.ShowInfoWindow();
+
+                //calculate estimated distance
+                double distance = Math.Round(response.Routes[0].Legs[0].Distance / 1000, 2);
+                EstDistanceTv.Text = $"Est. Distance: {distance} KM";
+                CalculatedTripDistance = distance;
+
+                //calculate estimate duration
+                TxtDuration.Text = $"Est. Duration:{Math.Round(response.Routes[0].Duration / 60)} Minutes";
+                pickupMarkerOptions.SetTitle($"{Math.Round(response.Routes[0].Duration / 60)} Min");
+                //AndHUD.Shared.ShowSuccess(context,$"R{CalculatePrice(distance)}", MaskType.Black,TimeSpan.FromSeconds(3));
             }
-            PolylineOptions polylineOptions = new PolylineOptions()
-                .AddAll(routeList)
-                .InvokeWidth(10)
-                .InvokeColor(Resource.Color.material_blue_grey_800)
-                .InvokeStartCap(new SquareCap())
-                .InvokeEndCap(new SquareCap())
-                .InvokeJointType(JointType.Round)
-                .Geodesic(true);
-            googleMap.AddPolyline(polylineOptions);
-
-            LatLng firstpoint = new LatLng(startPos.Latitude,startPos.Longitude);
-            LatLng lastpoint = new LatLng(endPos.Latitude, endPos.Longitude);
-
-            //Pickup marker options
-            MarkerOptions pickupMarkerOptions = new MarkerOptions();
-            pickupMarkerOptions.SetPosition(firstpoint);
-            pickupMarkerOptions.SetTitle("Pickup Location");
-
-            pickupMarkerOptions.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueGreen));
-
-
-            //Destination marker options
-            MarkerOptions destinationMarkerOptions = new MarkerOptions();
-            destinationMarkerOptions.SetPosition(lastpoint);
-            destinationMarkerOptions.SetTitle("Destination");
-            destinationMarkerOptions.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
-
-            Marker pickupMarker = googleMap.AddMarker(pickupMarkerOptions);
-
-            googleMap.AddMarker(destinationMarkerOptions);
-
-            double radiusDegrees = 0.10;
-            LatLng northEast = new LatLng(startPos.Latitude + radiusDegrees, startPos.Longitude + radiusDegrees);
-            LatLng southWest = new LatLng(endPos.Latitude - radiusDegrees, endPos.Longitude - radiusDegrees);
-            LatLngBounds bounds = new LatLngBounds(southWest, northEast);
-            googleMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(firstpoint, 15));
-            googleMap.SetPadding(40, 100, 40, 70);
-            pickupMarker.ShowInfoWindow();
-
-
-
-            //ImgCenterMarker.Visibility = ViewStates.Gone;
-            double distance = Math.Round(response.Routes[0].Legs[0].Distance / 1000, 2);
-            EstDistanceTv.Text = $" Est. Distance: {distance} KM";
-            CalculatedTripDistance = distance;
-            //TxtDuration.Text = $"{Math.Round(response.Routes[0].Duration / 60)} Minutes";
-            //TxtPrice.Text = $"R{CalculatePrice(distance)}";
-            //CalculatedTripPrice = CalculatePrice(distance);
-
-            //bottomSheet.State = BottomSheetBehavior.StateExpanded;
-            //ImgCenterMarker.Visibility = ViewStates.Gone;
-            //BtnContinue.Enabled = true;
-            //BtnContinue.Text = "CONTINUE";
-            //move = false;
+            catch (Exception ex)
+            {
+                AndHUD.Shared.ShowError(context,ex.Message, MaskType.Black,TimeSpan.FromSeconds(5));
+            }
 
         }
+
+        private double CalculatePrice(double distance)
+        {
+            //price per kilometer.
+            double pricePerKilometer = 6.50; // R6.50 per kilometer
+            double price = distance * pricePerKilometer;
+
+            return price;
+        }
+
+        private void GetUserInfo(string id)
+        {
+            CrossCloudFirestore
+            .Current
+            .Instance
+            .Collection("Incidents")
+            .Document(id)
+            .AddSnapshotListener(async (incidentSnapshot, incidentError) =>
+            {
+                if (incidentError != null || !incidentSnapshot.Exists)
+                {
+                    // Handle errors or no snapshot
+                    return;
+                }
+
+                var incident = incidentSnapshot.ToObject<Incident>();
+
+                if (incident == null)
+                {
+                    // Handle null incident
+                    return;
+                }
+
+                if(incident.UserId != null)
+                {
+                    try
+                    {
+                        CrossCloudFirestore
+                        .Current
+                        .Instance
+                        .Collection("USERS")
+                        .Document(incident.UserId)
+                        .AddSnapshotListener((snapshot, error) =>
+                        {
+                            if (snapshot.Exists)
+                            {
+                                var user = snapshot.ToObject<User>();
+                                reporterTv.Text = $"{user.FirstName} {user.LastName}";
+                            }
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        AndHUD.Shared.ShowError(context, ex.Message, MaskType.None, TimeSpan.FromSeconds(2));
+                    }
+                }
+                
+            });
+        }
+
     }
 }
