@@ -1,13 +1,10 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using AndroidHUD;
 using AndroidX.AppCompat.Widget;
-using AndroidX.Fragment.App;
 using Google.Android.Material.Button;
 using Google.Android.Material.TextField;
 using Google.Android.Material.TextView;
@@ -15,8 +12,6 @@ using Municipal_App.Models;
 using Plugin.CloudFirestore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DialogFragment = AndroidX.Fragment.App.DialogFragment;
 
 namespace Municipal_App.Dialogs

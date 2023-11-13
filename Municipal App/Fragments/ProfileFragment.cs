@@ -115,9 +115,9 @@ namespace Municipal_App.Fragments
                         }
                         else
                         {
-                            TextDrawable drawable1 = new TextDrawable.Builder()
-                            .BuildRound($"{user.FirstName.Substring(0, 1)}{user.LastName.Substring(0, 1)}", Color.DeepSkyBlue);
-                            user_picture.SetImageDrawable(drawable1);
+                            //////TextDrawable drawable1 = new TextDrawable.Builder()
+                            //.BuildRound($"{user.FirstName.Substring(0, 1)}{user.LastName.Substring(0, 1)}", Color.DeepSkyBlue);
+                            //user_picture.SetImageDrawable(drawable1);
                         }
                     }
                 });
