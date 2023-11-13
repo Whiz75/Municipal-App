@@ -37,6 +37,10 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -48,8 +52,12 @@
     <WarningLevel>4</WarningLevel>
     <AndroidPackageFormat>aab</AndroidPackageFormat>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -63,7 +71,7 @@
     <Compile Include="Activities\Sign_In_Activity.cs" />
     <Compile Include="Activities\Sign_Up_Activity.cs" />
     <Compile Include="Activities\Splash_Screen.cs" />
-    <Compile Include="Adapters\IncidentsHistoryAdapter.cs" />
+    <Compile Include="Adapters\IncidentTypeAdapter.cs" />
     <Compile Include="Adapters\IncidentsAdapter.cs" />
     <Compile Include="Dialogs\AddIncidentsTypeFragment.cs" />
     <Compile Include="Dialogs\DisplayIncidentOverviewFragment.cs" />
@@ -71,8 +79,10 @@
     <Compile Include="Dialogs\LocationDialogFragment.cs" />
     <Compile Include="Dialogs\NoNetworkFragment.cs" />
     <Compile Include="Dialogs\StatusUpdateDialogFragment.cs" />
+    <Compile Include="Dialogs\UpdateIncidentTypeDialogFragment.cs" />
     <Compile Include="Fragments\HistoryFragment.cs" />
     <Compile Include="Fragments\HomeFragment.cs" />
+    <Compile Include="Fragments\IncidentTypeFragment.cs" />
     <Compile Include="Fragments\ProfileFragment.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Models\FirebaseAdminSDK.cs" />
@@ -92,6 +102,12 @@
     <AndroidAsset Include="Assets\no_data_found_anim.json" />
     <AndroidAsset Include="Assets\location_anim.json" />
     <AndroidAsset Include="Assets\service_account.json" />
+    <AndroidAsset Include="Assets\map_style.json" />
+    <AndroidAsset Include="Assets\Teko_SemiBold.ttf" />
+    <AndroidAsset Include="Assets\Teko_Bold.ttf" />
+    <AndroidAsset Include="Assets\Teko_Light.ttf" />
+    <AndroidAsset Include="Assets\Teko_Medium.ttf" />
+    <AndroidAsset Include="Assets\Teko_Regular.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
@@ -173,6 +189,9 @@
     </PackageReference>
     <PackageReference Include="Plugin.FirebaseAuth">
       <Version>4.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.FirebasePushNotification">
+      <Version>3.4.35</Version>
     </PackageReference>
     <PackageReference Include="Plugin.FirebaseStorage">
       <Version>4.1.0</Version>
@@ -430,6 +449,41 @@
     <AndroidResource Include="Resources\layout\location_dialog_layout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_dest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_location.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\no_image.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\incident_type_item_row.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_mark_incident.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\incident_type_layout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\update_incident_type_layout.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\logo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

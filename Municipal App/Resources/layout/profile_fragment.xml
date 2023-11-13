@@ -16,17 +16,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
-        android:layout_marginEnd="@dimen/standard_dp"
-        android:layout_marginStart="@dimen/standard_dp"
-        app:cardCornerRadius="@dimen/standard_dp"
-        android:background="@color/white"
-        app:cardBackgroundColor="@color/deep_sky_blue">
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginStart="@dimen/medium_margin"
+        app:cardCornerRadius="@dimen/min_corner_radii"
+        app:cardBackgroundColor="#020024">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/five_dp"
-            android:layout_marginEnd="@dimen/five_dp"
+            android:layout_marginTop="@dimen/min_margin"
+            android:layout_marginEnd="@dimen/min_margin"
             android:text="@string/online_text"
             android:textStyle="bold"
             android:textColor="@color/forest_green"
@@ -64,7 +63,7 @@
                     android:layout_marginStart="8dp"
                     android:text="@string/username_txt"
                     android:fontFamily="sans-serif-condensed"
-                    android:textColor="#2a2929"
+                    android:textColor="@color/white_smoke"
                     android:textStyle="bold"
                     android:textSize="24sp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -76,20 +75,22 @@
                     android:id="@+id/TextViewProfileRole"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_dp"
+                    android:layout_marginStart="@dimen/medium_margin"
                     android:text="@string/role_txt"
                     android:textSize="16sp"
                     android:textAllCaps="true"
                     android:textStyle="bold"
+                    android:textColor="@color/white_smoke"
                     android:fontFamily="sans-serif-condensed"/>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/standard_dp"
+                    android:layout_marginStart="@dimen/medium_margin"
                     android:text="@string/date_txt"
                     android:textSize="12sp"
+                    android:textColor="@color/white_smoke"
                     android:fontFamily="sans-serif-smallcaps"
                     app:layout_constraintStart_toEndOf="@+id/postProfilePic"
                     android:accessibilityHeading="@+id/postUsername" />
@@ -101,13 +102,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
-        android:layout_marginEnd="@dimen/standard_dp"
-        android:layout_marginStart="@dimen/standard_dp"
-        android:layout_marginTop="@dimen/standard_dp"
-        app:cardCornerRadius="@dimen/standard_dp"
-        android:background="@color/white"
+        android:layout_marginEnd="@dimen/medium_margin"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/min_margin"
+        app:cardCornerRadius="@dimen/min_corner_radii"
         android:layout_below="@+id/materialCardView1"
-        android:layout_centerInParent="false">
+        android:layout_centerInParent="false"
+        app:cardBackgroundColor="#020024">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -117,13 +118,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/ten_dp"
+                android:layout_margin="@dimen/min_margin"
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/firstname_txt"
+                    android:textColor="@color/white_smoke"
                     style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense"/>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -133,13 +135,15 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/InputProfileFirstName"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white_smoke"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/fiften_dp"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:textColor="@color/white_smoke"
                     android:text="@string/Lastname_txt"/>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -149,13 +153,15 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/InputProfileLastName"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white_smoke"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/fiften_dp"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:textColor="@color/white_smoke"
                     android:text="@string/email_txt"/>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -165,13 +171,15 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/InputProfileEmail"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white_smoke"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/fiften_dp"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:textColor="@color/white_smoke"
                     android:text="@string/role_txt"/>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -181,19 +189,19 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/InputProfileRole"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white_smoke"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/BtnProfileUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/fiften_dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:layout_gravity="end"
                     android:text="update"
                     style="@style/ThemeOverlay.Material3.Button.ElevatedButton"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 </RelativeLayout>

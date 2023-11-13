@@ -20,13 +20,14 @@
 	<string name="add_incident_type">Add Incident Type</string>
 
 	<string name="nav_home">Home</string>
+	<string name="nav_incident_type">Incident Type</string>
 	<string name="nav_history">History</string>
 	<string name="nav_profile">Profile</string>
 
 	<!--incident dialog-->
 	<string name="username_txt">username</string>
 	<string name="date_txt">2023/09/17</string>
-	<string name="type_txt">Type of incident</string>
+	<string name="type_txt">Type</string>
 	<string name="description_txt">comment or description</string>
 	<string name="coordinates_txt">coordinates</string>
 	<string name="severity_txt">severity</string>

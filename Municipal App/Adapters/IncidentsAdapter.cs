@@ -1,26 +1,24 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using Android.Content;
+using Android.Content.Res;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
-using AndroidHUD;
 using AndroidX.AppCompat.Widget;
 using AndroidX.RecyclerView.Widget;
-using Firebase.Annotations;
+using Firebase.Firestore.Auth;
 using Google.Android.Material.Button;
+using Google.Android.Material.TextField;
 using Google.Android.Material.TextView;
 using IsmaelDiVita.ChipNavigationLib.Utils;
-using Java.Util.Zip;
 using Municipal_App.Dialogs;
 using Municipal_App.Models;
 using Plugin.CloudFirestore;
-using Refractored.Controls;
 using Square.Picasso;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using XamarinTextDrawable;
+using User = Municipal_App.Models.User;
 
 namespace Municipal_App.Adapters
 {
@@ -46,26 +44,40 @@ namespace Municipal_App.Adapters
             var incident = incidents[position];
 
             vh.severity.Text = incident.Severity;
-            vh.date.Text = incident.DateReported.ToString();
-            vh.description.Text = incident.Description;
+            vh.date.Text = $"DATE REPORTED:{incident.DateReported}";
+
+            if(incident.Description != null)
+            {
+                vh.description.Text = incident.Description;
+            }
+            else
+            {
+                vh.description.Visibility = ViewStates.Gone;
+                vh.comment.Visibility = ViewStates.Gone;
+            }
+            
             vh.status.Text = incident.Status;
 
-            //handle incident status colors
-            if (incident.Status == "PENDING")
+            if(incident.Status != null)
             {
-                //red
-                vh.status.SetTextColor(Android.Graphics.Color.ParseColor("#ffb74d"));
-            }
-            else if (incident.Status == "IN-PROGRESS")
-            {
-                //orange
-                vh.status.SetTextColor(Android.Graphics.Color.ParseColor("#4caf50"));
+                //handle incident status colors
+                if (incident.Status == "PENDING")
+                {
+                    //red
+                    vh.status.SetTextColor(Color.ParseColor("#FF8C00"));
+                }
+                else if (incident.Status == "IN-PROGRESS")
+                {
+                    //orange
+                    vh.status.SetTextColor(Color.ParseColor("#4caf50"));
 
-            }
-            else if (incident.Status == "COMPLETED")
-            {
-                //green
-                vh.status.SetTextColor(Android.Graphics.Color.ParseColor("#e0e0e0"));
+                }
+                else if (incident.Status == "COMPLETED")
+                {
+                    //green
+                    vh.status.SetTextColor(Color.ParseColor("#A9A9A9"));
+                    vh.BtnReviewIncident.Visibility = ViewStates.Gone;
+                }
             }
 
             vh.BtnReviewIncident.Click += delegate
@@ -99,18 +111,14 @@ namespace Municipal_App.Adapters
                 }
                 else
                 {
-                    vh.image.SetImageResource(Resource.Drawable.no_content);
-                    Toast.MakeText(mContext, "Error Loading Image...", ToastLength.Short).Show();
+                    // Set the drawable to the ImageView
+                    vh.image.SetImageResource(Resource.Drawable.no_image);
                 }
             }
             catch(Exception ex)
             {
                 Toast.MakeText(mContext,ex.Message, ToastLength.Short).Show();
             }
-        }
-
-        private void BtnReviewIncident_Click(object sender, EventArgs e)
-        {
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -125,6 +133,7 @@ namespace Municipal_App.Adapters
             public MaterialTextView severity;
             public MaterialTextView date;
             public MaterialTextView description;
+            public MaterialTextView comment;
             public MaterialTextView type;
             public MaterialTextView status;
             public AppCompatImageView image;
@@ -135,6 +144,7 @@ namespace Municipal_App.Adapters
                 severity = itemView.FindViewById<MaterialTextView>(Resource.Id.severity);
                 date = itemView.FindViewById<MaterialTextView>(Resource.Id.date);
                 description = itemView.FindViewById<MaterialTextView>(Resource.Id.description);
+                comment = itemView.FindViewById<MaterialTextView>(Resource.Id.comment);
                 type = itemView.FindViewById<MaterialTextView>(Resource.Id.type);
                 status = itemView.FindViewById<MaterialTextView>(Resource.Id.status);
                 image = itemView.FindViewById<AppCompatImageView>(Resource.Id.img);

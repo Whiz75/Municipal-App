@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical"
-        android:layout_margin="@dimen/twenty_dp">
+        android:layout_margin="@dimen/max_margin">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/medium_margin"
             android:text="@string/Password_txt"
             android:textStyle="normal"
             android:textAllCaps="true"/>
@@ -72,7 +72,7 @@
             android:id="@+id/TextViewResetPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginTop="@dimen/min_margin"
             android:text="@string/reset_password_txt"
             android:layout_gravity="end"/>
 
@@ -80,14 +80,14 @@
             android:id="@+id/BtnSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/min_margin"
             android:text="@string/common_signin_button_text"
             android:layout_gravity="center_horizontal"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/medium_margin"
             android:orientation="horizontal"
             android:gravity="center_horizontal">
 
@@ -101,7 +101,7 @@
                 android:id="@+id/TextViewLoginSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/five_dp"
+                android:layout_marginStart="@dimen/min_margin"
                 android:text="@string/sign_up_txt"
                 android:textStyle="bold"
                 android:textAllCaps="true"

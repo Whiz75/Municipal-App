@@ -12,16 +12,13 @@ using AndroidX.AppCompat.Widget;
 using Android.Content.Res;
 using Google.Android.Material.Dialog;
 using Plugin.FirebaseAuth;
-using AlertDialog = AndroidX.AppCompat.App.AlertDialog;
 using Android.Content;
-using Android.Net;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
-using static Xamarin.Essentials.Permissions;
-using System;
 using Android.Locations;
 using Firebase.Messaging;
 using Android.Gms.Extensions;
+using Plugin.FirebasePushNotification;
+using AndroidHUD;
+using System;
 
 namespace Municipal_App
 {
@@ -33,14 +30,21 @@ namespace Municipal_App
         private FloatingActionButton fabViewIncidents;
         private BottomNavigationView bottomNavigationView;
 
-        protected override async void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
-            await FirebaseMessaging.Instance.SubscribeToTopic("Incidents");
+            //await FirebaseMessaging.Instance.SubscribeToTopic("Incidents");
+            CrossFirebasePushNotification.Current.Subscribe("Incidents");
+
+            CrossFirebasePushNotification.Current.OnNotificationReceived += ((s,e) =>
+            {
+                AndHUD.Shared.ShowSuccess(this, "it ran",MaskType.None,TimeSpan.FromSeconds(3));
+            });
+
             //initiate components
             Init();
 
@@ -49,20 +53,18 @@ namespace Municipal_App
                 SupportFragmentManager.BeginTransaction().Add(Resource.Id.fragHost, new HomeFragment()).Commit();
             }
 
-            if (!isGpsAvailable())
-            {
-                EnableLocationFragment frag = new EnableLocationFragment();
-                frag.Show(SupportFragmentManager.BeginTransaction(),"");
-            }
+            //if (!isGpsAvailable())
+            //{
+            //    EnableLocationFragment frag = new EnableLocationFragment();
+            //    frag.Show(SupportFragmentManager.BeginTransaction(),"");
+            //}
         }
 
         private void Init()
         {
-            topAppBar = FindViewById<MaterialToolbar>(Resource.Id.topAppBar);
             fabAddIncident = FindViewById<FloatingActionButton>(Resource.Id.fabAddIncident);
             bottomNavigationView = FindViewById<BottomNavigationView>(Resource.Id.bottom_navigation);
 
-            topAppBar.MenuItemClick += TopAppBar_MenuItemClick;
             bottomNavigationView.SetOnItemSelectedListener(this);
             fabAddIncident.Click += delegate
             {
@@ -71,24 +73,15 @@ namespace Municipal_App
             };
         }
 
-        private void TopAppBar_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
-        {
-            switch(e.Item.ItemId)
-            {
-                case Resource.Id.top_bar_sign_out:
-                    UserSignOut();
-                    break;
-                case Resource.Id.top_bar_profile:
-                    break;
-            }
-        }
-
         bool IOnItemSelectedListener.OnNavigationItemSelected(IMenuItem p0)
         {
             switch (p0.ItemId)
             {
                 case Resource.Id.item_home:
                     SupportFragmentManager.BeginTransaction().Replace(Resource.Id.fragHost, new HomeFragment()).Commit();
+                    break;
+                case Resource.Id.item_incident_type:
+                    SupportFragmentManager.BeginTransaction().Replace(Resource.Id.fragHost, new IncidentTypeFragment()).Commit();
                     break;
                 case Resource.Id.item_history:
                     SupportFragmentManager.BeginTransaction().Replace(Resource.Id.fragHost, new HistoryFragment()).Commit();

@@ -10,13 +10,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true"
-        android:layout_margin="@dimen/twenty_dp"
+        android:layout_margin="@dimen/medium_margin"
         >
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/min_margin"
             android:text="@string/sign_up_txt"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -44,7 +44,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/min_margin"
             android:text="@string/Lastname_txt"
             android:textAllCaps="true"/>
 
@@ -63,7 +63,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/min_margin"
             android:text="@string/email_txt"
             android:textAllCaps="true"/>
 
@@ -82,7 +82,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/min_margin"
             android:text="@string/Password_txt"
             android:textAllCaps="true"/>
 
@@ -101,7 +101,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/min_margin"
             android:text="@string/confirm_password_txt"
             android:textAllCaps="true"/>
 
@@ -121,13 +121,13 @@
             android:id="@+id/BtnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/min_margin"
             android:text="@string/sign_up_txt"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/five_dp"
+            android:layout_marginTop="@dimen/x_min_margin"
             android:orientation="horizontal"
             android:gravity="center_horizontal">
 
@@ -141,7 +141,7 @@
                 android:id="@+id/TextViewSignUpSignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/five_dp"
+                android:layout_marginStart="@dimen/x_min_margin"
                 android:textAllCaps="true"
                 android:textColor="@color/green"
                 android:text="@string/sign_in_txt"/>

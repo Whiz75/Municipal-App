@@ -6,18 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/top_app_bar"/>
-    </com.google.android.material.appbar.AppBarLayout>
-
     <FrameLayout
         android:id="@+id/fragHost"
         android:layout_width="match_parent"
@@ -31,7 +19,7 @@
       android:layout_height="wrap_content"
       android:layout_gravity="bottom|end"
       android:layout_margin="16dp"
-      android:src="@android:drawable/ic_menu_edit"
+      android:src="@android:drawable/ic_input_add"
       android:contentDescription="@string/add_comment_txt"
       android:layout_alignParentEnd="true"
       android:layout_above="@id/bottom_nav_cardview"
@@ -41,7 +29,7 @@
         android:id="@+id/bottom_nav_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/twenty_dp"
+        android:padding="@dimen/medium_padding"
         android:layout_alignParentBottom="true"
         android:elevation="8dp"
         app:cardBackgroundColor="@color/colorPrimary"

@@ -1,12 +1,8 @@
-﻿using Android.App;
-using Android.Content;
+﻿using Android.Content;
+using Android.Graphics;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
-using Android.Widget;
 using AndroidHUD;
-using AndroidX.Fragment.App;
 using Google.Android.Material.Button;
 using Google.Android.Material.TextField;
 using Google.Android.Material.TextView;
@@ -19,10 +15,9 @@ using Square.Picasso;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using XamarinTextDrawable;
 using Fragment = AndroidX.Fragment.App.Fragment;
 
 namespace Municipal_App.Fragments
@@ -77,7 +72,13 @@ namespace Municipal_App.Fragments
             ET_Role = view.FindViewById<TextInputEditText>(Resource.Id.InputProfileRole);
 
             user_picture = view.FindViewById<CircleImageView>(Resource.Id.user_picture);
+
             BtnProfileUpdate = view.FindViewById<MaterialButton>(Resource.Id.BtnProfileUpdate);
+
+            //BtnProfileUpdate.Click += delegate
+            //{
+            //    UpdateUserInfo();
+            //};
         }
 
         private void GetUserInfo()
@@ -103,7 +104,7 @@ namespace Municipal_App.Fragments
                         role.Text = $"ROLE: {user.Role}";
                         ET_Role.Text = user.Role;
 
-                        if(user.Url != null)
+                        if (user.Url != null)
                         {
                             Picasso
                             .Get()
@@ -114,7 +115,9 @@ namespace Municipal_App.Fragments
                         }
                         else
                         {
-                            user_picture.SetImageResource(Resource.Drawable.icon_user);
+                            TextDrawable drawable1 = new TextDrawable.Builder()
+                            .BuildRound($"{user.FirstName.Substring(0, 1)}{user.LastName.Substring(0, 1)}", Color.DeepSkyBlue);
+                            user_picture.SetImageDrawable(drawable1);
                         }
                     }
                 });
@@ -125,36 +128,29 @@ namespace Municipal_App.Fragments
             }
         }
 
-        private void UpdateUserInfo()
+        private async void UpdateUserInfo()
         {
-            BtnProfileUpdate.Click += delegate
+            try
             {
-                try
+                Dictionary<string, object> user = new Dictionary<string, object>
                 {
-                    CrossCloudFirestore
-                    .Current
-                    .Instance
-                    .Collection("USERS")
-                    .Document(CrossFirebaseAuth.Current.Instance.CurrentUser.Uid)
-                    .AddSnapshotListener((snapshot, error) =>
-                    {
-                        if (snapshot.Exists)
-                        {
-                            var user = snapshot.ToObject<User>();
+                    { "FirstName", Firstname.Text },
+                    { "LastName", Lastname.Text },
+                    // Add more fields as needed
+                };
 
-                            User user1 = new User()
-                            {
-                                FirstName = user.FirstName,
-                                LastName = user.LastName
-                            };
-                        }
-                    });
-                }
-                catch (Exception ex)
-                {
-                    AndHUD.Shared.ShowError(mContext, ex.Message, MaskType.None, TimeSpan.FromSeconds(3));
-                }
-            };
+                await CrossCloudFirestore
+                .Current
+                .Instance
+                .Collection("USERS")
+                .Document(CrossFirebaseAuth.Current.Instance.CurrentUser.Uid)
+                .UpdateAsync(user);
+                    
+            }
+            catch (Exception ex)
+            {
+                AndHUD.Shared.ShowError(mContext, ex.Message, MaskType.None, TimeSpan.FromSeconds(3));
+            }
         }
 
         private void UpdateProfileImage()

@@ -8,13 +8,13 @@
     android:padding="@dimen/medium_padding">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/close_add_incidents"
+        android:id="@+id/close_update_incident_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="20dp"
         android:src="@drawable/mtrl_ic_cancel" 
-        android:tint="@color/colorPrimary"/>
+        android:tint="@android:color/black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,30 +26,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="@string/enter_incident_type_txt"
+            android:text="UPDATE INCIDENT TYPE NAME"
             android:textSize="20sp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/incident_type_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:text="INCIDENT TYPE NAME" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:minWidth="@dimen/max_margin"
             android:minHeight="@dimen/max_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x_min_margin"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/AddIncidentTextInput" />
+                android:id="@+id/UpdateIncidentTextInput"
+                android:hint="Enter new Incident Type name"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/BtnAddIncident"
+            android:id="@+id/BtnUpdateIncident"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x_min_margin"
             android:layout_below="@+id/textInputLayout1"
             android:layout_alignParentEnd="true"
-            android:text="@string/abc_action_mode_done"
+            android:text="UPDATE"
             android:layout_gravity="end"/>
     </LinearLayout>
 

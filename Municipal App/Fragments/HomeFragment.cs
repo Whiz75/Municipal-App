@@ -4,11 +4,15 @@ using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using AndroidHUD;
+using AndroidX.AppCompat.Widget;
+using AndroidX.CardView.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
 using Facebook.Shimmer;
+using Google.Android.Material.TextView;
 using IO.SuperCharge.ShimmerLayoutLib;
 using Municipal_App.Activities;
 using Municipal_App.Adapters;
@@ -27,7 +31,11 @@ namespace Municipal_App.Fragments
     public class HomeFragment : Fragment
     {
         private Context mContext;
+
+        private AppCompatImageView cancelNoOfIncident;
+        private CardView cardView1;
         private ShimmerFrameLayout mFrameLayout;
+        private MaterialTextView noOfIncident;
         private RecyclerView recyclerView;
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -44,7 +52,10 @@ namespace Municipal_App.Fragments
 
             View view = inflater.Inflate(Resource.Layout.home_fragment, container, false);
             Init(view);
+
+            //mFrameLayout.StartShimmer();
             LoadIncidents();
+            //mFrameLayout.StopShimmer();
 
             return view;
         }
@@ -52,9 +63,26 @@ namespace Municipal_App.Fragments
         private void Init(View view)
         {
             mContext = view.Context;
+            cancelNoOfIncident = view.FindViewById<AppCompatImageView>(Resource.Id.cancelNoOfIncident);
+
+            cardView1 = view.FindViewById<CardView>(Resource.Id.cardView1);
 
             mFrameLayout = view.FindViewById<ShimmerFrameLayout>(Resource.Id.shimmer_layout);
+            noOfIncident = view.FindViewById<MaterialTextView>(Resource.Id.noOfIncident);
             recyclerView = view.FindViewById<RecyclerView>(Resource.Id.rv_incidents);
+
+            cancelNoOfIncident.Click += delegate
+            {
+                // Calculate the screen height
+                int screenHeight = Resources.DisplayMetrics.HeightPixels;
+
+                // Create a TranslateAnimation that moves the view from the bottom to the top
+                TranslateAnimation slideAnimation = new TranslateAnimation(0, 0, 0, screenHeight);
+                slideAnimation.Duration = 2000; // Duration of the animation in milliseconds
+                cardView1.StartAnimation(slideAnimation); // Start the animation
+
+                cardView1.Visibility = ViewStates.Gone;
+            };
         }
 
         private void LoadIncidents()
@@ -69,7 +97,7 @@ namespace Municipal_App.Fragments
             recyclerView.SetAdapter(mAdapter);
 
             mFrameLayout.StartShimmer();
-            
+
             try
             {
                 CrossCloudFirestore
@@ -96,6 +124,7 @@ namespace Municipal_App.Fragments
                                         break;
                                 }
                             }
+                            noOfIncident.Text = $"YOU HAVE {incidentsList.Count} INCIDENTS PENDING YOUR APPROVAL";
                         }
                     });
                 mAdapter.NotifyDataSetChanged();
@@ -107,6 +136,7 @@ namespace Municipal_App.Fragments
             finally
             {
                 mFrameLayout.StopShimmer();
+                mFrameLayout.Visibility = ViewStates.Gone;
             }
         }
     }

@@ -39,18 +39,20 @@ namespace Municipal_App.Activities
             var user = CrossFirebaseAuth.Current.Instance.CurrentUser;
             var current = Connectivity.NetworkAccess;
 
-            if (current == NetworkAccess.Internet)
+            //if (current == NetworkAccess.Internet)
+            //{
+
+            //}
+            //else
+            //{
+            //    NoNetworkFragment noNetwork = new NoNetworkFragment();
+            //    noNetwork.Show(SupportFragmentManager.BeginTransaction(), "");
+            //}
+
+            // user is not null
+            if (user != null)
             {
-                // Connection to internet is available
-                if (user != null)
-                {
-                    StartActivity(new Intent(Application.Context, typeof(MainActivity)));
-                }
-            }
-            else
-            {
-                NoNetworkFragment noNetwork = new NoNetworkFragment();
-                noNetwork.Show(SupportFragmentManager.BeginTransaction(), "");
+                StartActivity(new Intent(Application.Context, typeof(MainActivity)));
             }
         }
 
