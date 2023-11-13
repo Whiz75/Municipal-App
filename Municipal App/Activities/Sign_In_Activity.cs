@@ -36,24 +36,7 @@ namespace Municipal_App.Activities
             //initiate components
             Init();
 
-            var user = CrossFirebaseAuth.Current.Instance.CurrentUser;
-            var current = Connectivity.NetworkAccess;
 
-            //if (current == NetworkAccess.Internet)
-            //{
-
-            //}
-            //else
-            //{
-            //    NoNetworkFragment noNetwork = new NoNetworkFragment();
-            //    noNetwork.Show(SupportFragmentManager.BeginTransaction(), "");
-            //}
-
-            // user is not null
-            if (user != null)
-            {
-                StartActivity(new Intent(Application.Context, typeof(MainActivity)));
-            }
         }
 
         private void Init()
@@ -79,7 +62,7 @@ namespace Municipal_App.Activities
 
         private async void LoginUser()
         {
-            
+
             if (string.IsNullOrEmpty(InputLoginEmail.Text) || string.IsNullOrWhiteSpace(InputLoginEmail.Text))
             {
                 InputLoginEmail.RequestFocus();

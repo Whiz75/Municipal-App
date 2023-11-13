@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout1"
@@ -22,28 +24,30 @@
                 android:hint="@string/searchbar_hint" />
 
             <com.google.android.material.search.SearchView
-                  android:id="@+id/searchView1"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:hint="@string/searchbar_hint"
-                  app:layout_anchor="@id/search_bar">
+                android:id="@+id/searchView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/searchbar_hint"
+                app:layout_anchor="@id/search_bar">
             <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
-          </com.google.android.material.search.SearchView>
+            </com.google.android.material.search.SearchView>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
 
     <com.facebook.shimmer.ShimmerFrameLayout
-     android:id="@+id/shimmer_layout"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content">
+        android:id="@+id/shimmer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardView1"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
-     
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -57,7 +61,7 @@
                 android:layout_alignBottom="@+id/shimmer_description_1"
                 android:layout_alignParentRight="true"
                 android:background="@color/shimmer_background_color" />
-             <View
+            <View
                 android:layout_width="101dp"
                 android:layout_height="17dp"
                 android:layout_marginTop="4dp"
@@ -85,7 +89,7 @@
                 android:layout_alignBottom="@+id/shimmer_description_1"
                 android:layout_alignParentRight="true"
                 android:background="@color/shimmer_background_color" />
-             <View
+            <View
                 android:layout_width="101dp"
                 android:layout_height="17dp"
                 android:layout_marginTop="4dp"
@@ -100,7 +104,7 @@
                 android:layout_marginBottom="11dp"
                 android:layout_marginTop="11dp"
                 android:background="@color/shimmer_background_color" />
-                        <View
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_alignTop="@+id/shimmer_avatar_1"
@@ -113,7 +117,7 @@
                 android:layout_alignBottom="@+id/shimmer_description_1"
                 android:layout_alignParentRight="true"
                 android:background="@color/shimmer_background_color" />
-             <View
+            <View
                 android:layout_width="101dp"
                 android:layout_height="17dp"
                 android:layout_marginTop="4dp"
@@ -128,8 +132,8 @@
                 android:layout_marginBottom="11dp"
                 android:layout_marginTop="11dp"
                 android:background="@color/shimmer_background_color" />
-               
-       </LinearLayout>
+
+        </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.cardview.widget.CardView
@@ -137,25 +141,34 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="8dp"
-        app:cardCornerRadius="8dp">
+        app:cardBackgroundColor="@color/colorSecondary"
+        app:cardCornerRadius="4dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/cancelNoOfIncident"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/mtrl_ic_cancel"
-            app:tint="@color/gray"
-            android:layout_gravity="end"
-            android:layout_margin="5dp"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/noOfIncident"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:textStyle="bold"
-            android:layout_gravity="center_vertical"/>
+            android:orientation="vertical"
+        >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cancelNoOfIncident"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/mtrl_ic_cancel"
+                app:tint="@color/colorPrimary"
+                android:layout_gravity="end"
+                android:layout_margin="5dp"/>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/noOfIncident"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -107,9 +107,9 @@ namespace Municipal_App.Fragments
                     .WhereIn("Status", new object[] { "IN-PROGRESS", "PENDING" })
                     .AddSnapshotListener((value, error) =>
                     {
-                        if(!value.IsEmpty)
+                        if (!value.IsEmpty)
                         {
-                            foreach(var item in value.DocumentChanges)
+                            foreach (var item in value.DocumentChanges)
                             {
                                 var j = item.Document.ToObject<Incident>();
                                 switch (item.Type)

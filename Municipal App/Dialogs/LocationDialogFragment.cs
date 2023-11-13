@@ -269,7 +269,7 @@ namespace Municipal_App.Dialogs
             }
             catch (Exception ex)
             {
-                AndHUD.Shared.ShowError(context,ex.Message,MaskType.None,TimeSpan.FromSeconds(3));
+                AndHUD.Shared.ShowError(context, ex.Message, MaskType.None, TimeSpan.FromSeconds(3));
             }
         }
 
@@ -317,7 +317,7 @@ namespace Municipal_App.Dialogs
                 //    .Geodesic(true);
                 //googleMap.AddPolyline(polylineOptions);
 
-                await drawPolylines(routeList);
+                drawPolylines(routeList);
 
                 LatLng firstpoint = new LatLng(startPos.Latitude, startPos.Longitude);
                 LatLng lastpoint = new LatLng(endPos.Latitude, endPos.Longitude);
@@ -340,7 +340,7 @@ namespace Municipal_App.Dialogs
                 //destinationMarkerOptions.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
 
                 //Marker destinationMarker = googleMap.AddMarker(destinationMarkerOptions);
-                createMarkerOptions(lastpoint,"Incident Location",BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
+                createMarkerOptions(lastpoint, "Incident Location", BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
 
                 double radiusDegrees = 0.10;
                 LatLng northEast = new LatLng(startPos.Latitude + radiusDegrees, startPos.Longitude + radiusDegrees);
@@ -361,12 +361,12 @@ namespace Municipal_App.Dialogs
             }
             catch (Exception ex)
             {
-                AndHUD.Shared.ShowError(context,ex.Message, MaskType.Black,TimeSpan.FromSeconds(5));
+                AndHUD.Shared.ShowError(context, ex.Message, MaskType.Black, TimeSpan.FromSeconds(5));
             }
 
         }
 
-        private async Task drawPolylines(Java.Util.ArrayList routeList)
+        private void drawPolylines(Java.Util.ArrayList routeList)
         {
             PolylineOptions polylineOptions = new PolylineOptions()
                     .AddAll(routeList)
@@ -424,7 +424,7 @@ namespace Municipal_App.Dialogs
                     return;
                 }
 
-                if(incident.UserId != null)
+                if (incident.UserId != null)
                 {
                     try
                     {
@@ -443,10 +443,13 @@ namespace Municipal_App.Dialogs
                                 // Generate random color
                                 //ColorGenerator generator = new ColorGenerator();
                                 //int color = generator.GetRandomColor();
+                                if (user.FirstName.Length > 0 && user.LastName.Length > 0)
+                                {
+                                    TextDrawable drawable1 = new TextDrawable.Builder()
+                                        .BuildRound($"{user.FirstName.Substring(0, 1)}{user.LastName.Substring(0, 1)}", Color.DeepSkyBlue);
+                                    user_image_or_text_drawable.SetImageDrawable(drawable1);
+                                }
 
-                                TextDrawable drawable1 = new TextDrawable.Builder()
-                                .BuildRound($"{user.FirstName.Substring(0, 1)}{user.LastName.Substring(0, 1)}", Color.DeepSkyBlue);
-                                user_image_or_text_drawable.SetImageDrawable(drawable1);
 
                                 //if (!string.IsNullOrEmpty(user.Url))
                                 //{
@@ -465,7 +468,7 @@ namespace Municipal_App.Dialogs
                         AndHUD.Shared.ShowError(context, ex.Message, MaskType.None, TimeSpan.FromSeconds(2));
                     }
                 }
-                
+
             });
         }
     }

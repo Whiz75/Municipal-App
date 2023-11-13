@@ -50,7 +50,7 @@ namespace Municipal_App.Dialogs
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
 
-            View view = inflater.Inflate(Resource.Layout.update_incident_type_layout,container,false);
+            View view = inflater.Inflate(Resource.Layout.update_incident_type_layout, container, false);
             Init(view);
             ShowIncidentTypeName();
 
@@ -114,11 +114,11 @@ namespace Municipal_App.Dialogs
                          .Document(Id)
                          .UpdateAsync(type);
 
-                AndHUD.Shared.ShowSuccess(mContext,"Incident type successfully updated!!!");
+                AndHUD.Shared.ShowSuccess(mContext, "Incident type successfully updated!!!", MaskType.Clear, TimeSpan.FromSeconds(2));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Toast.MakeText(mContext,e.Message,ToastLength.Long).Show();
+                Toast.MakeText(mContext, e.Message, ToastLength.Long).Show();
             }
         }
     }

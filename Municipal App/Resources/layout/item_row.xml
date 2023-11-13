@@ -9,12 +9,12 @@
     tools:ignore="MissingConstraints"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="16dp"
+    android:layout_marginTop="8dp"
     android:paddingBottom="5dp"
     android:paddingTop="5dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
-    app:cardBackgroundColor="#020024">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,14 +24,15 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img"
             android:layout_width="match_parent"
-            android:layout_height="204dp"/>
+            android:scaleType="centerCrop"
+            android:layout_height="150dp"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/x_min_margin"
             app:cardCornerRadius="@dimen/x_min_margin"
-            app:cardBackgroundColor="@color/dark_orange">
+            app:cardBackgroundColor="@color/colorSecondary">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -146,14 +147,14 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-         <com.google.android.material.textview.MaterialTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/date_txt"
             android:textSize="10sp"
-            android:textColor="@color/white_smoke"
-            android:fontFamily="sans-serif-smallcaps" 
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="sans-serif-smallcaps"
             android:textStyle="bold"
             android:layout_marginStart="@dimen/x_min_margin"
             android:layout_marginTop="@dimen/x_min_margin"
@@ -168,7 +169,7 @@
             android:text="REVIEW"
             android:textSize="8dp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/colorAccent"
+            android:backgroundTint="@color/colorPrimary"
             style="@style/Widget.Material3.Button"
             app:cornerRadius="@dimen/min_corner_radii"
             android:layout_gravity="end"/>

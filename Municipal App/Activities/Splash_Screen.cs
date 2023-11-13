@@ -7,6 +7,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using Firebase;
 using Plugin.CloudFirestore;
+using Plugin.FirebaseAuth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Municipal_App.Activities
 {
-    [Activity(Label = "Splash_Screen", Theme = "@style/MyTheme.Splash", MainLauncher =true)]
+    [Activity(Label = "Splash_Screen", Theme = "@style/MyTheme.Splash", MainLauncher = true)]
     public class Splash_Screen : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -23,24 +24,42 @@ namespace Municipal_App.Activities
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            if(savedInstanceState == null)
+            if (savedInstanceState == null)
             {
             }
-            FirebaseApp.InitializeApp(Application.Context);
+            //FirebaseApp.InitializeApp(Application.Context);
+
+            /*Task startupWork = new Task(() => { SimulateStartup(); });
+            startupWork.Start();*/
+            CrossFirebaseAuth
+                .Current
+                .Instance
+                .AuthState += Instance_AuthState;
+        }
+
+        private void Instance_AuthState(object sender, AuthStateEventArgs e)
+        {
+            if (e.Auth.CurrentUser == null)
+            {
+                SimulateStartup();
+            }
+            else
+            {
+                StartActivity(new Intent(Application.Context, typeof(MainActivity)));
+                OverridePendingTransition(Resource.Animation.left_in, Resource.Animation.left_out);
+            }
         }
 
         // Launches the startup task
         protected override void OnResume()
         {
             base.OnResume();
-            Task startupWork = new Task(() => { SimulateStartup(); });
-            startupWork.Start();
         }
 
         // Simulates background work that happens behind the splash screen
         async void SimulateStartup()
         {
-            await Task.Delay(3000); // Simulate a bit of startup work.
+            //await Task.Delay(3000); // Simulate a bit of startup work.
             StartActivity(new Intent(Application.Context, typeof(Sign_In_Activity)));
             OverridePendingTransition(Resource.Animation.left_in, Resource.Animation.left_out);
         }
