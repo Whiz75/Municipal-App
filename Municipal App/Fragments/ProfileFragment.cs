@@ -75,10 +75,10 @@ namespace Municipal_App.Fragments
 
             BtnProfileUpdate = view.FindViewById<MaterialButton>(Resource.Id.BtnProfileUpdate);
 
-            //BtnProfileUpdate.Click += delegate
-            //{
-            //    UpdateUserInfo();
-            //};
+            BtnProfileUpdate.Click += delegate
+            {
+                UpdateUserInfo();
+            };
         }
 
         private void GetUserInfo()
@@ -115,7 +115,7 @@ namespace Municipal_App.Fragments
                         }
                         else
                         {
-                            //////TextDrawable drawable1 = new TextDrawable.Builder()
+                            //TextDrawable drawable1 = new TextDrawable.Builder()
                             //.BuildRound($"{user.FirstName.Substring(0, 1)}{user.LastName.Substring(0, 1)}", Color.DeepSkyBlue);
                             //user_picture.SetImageDrawable(drawable1);
                         }
