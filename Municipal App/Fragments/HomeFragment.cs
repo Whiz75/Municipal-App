@@ -1,30 +1,20 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
-using Android.Widget;
 using AndroidHUD;
 using AndroidX.AppCompat.Widget;
 using AndroidX.CardView.Widget;
-using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
 using Facebook.Shimmer;
 using Google.Android.Material.TextView;
-using IO.SuperCharge.ShimmerLayoutLib;
-using Municipal_App.Activities;
 using Municipal_App.Adapters;
 using Municipal_App.Dialogs;
 using Municipal_App.Models;
 using Plugin.CloudFirestore;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Fragment = AndroidX.Fragment.App.Fragment;
 
 namespace Municipal_App.Fragments
@@ -52,11 +42,9 @@ namespace Municipal_App.Fragments
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
 
             View view = inflater.Inflate(Resource.Layout.home_fragment, container, false);
-            Init(view);
 
-            //mFrameLayout.StartShimmer();
+            Init(view);
             LoadIncidents();
-            //mFrameLayout.StopShimmer();
 
             return view;
         }
@@ -89,7 +77,6 @@ namespace Municipal_App.Fragments
         private void LoadIncidents()
         {
             List<Incident> incidentsList = new List<Incident>();
-            //IncidentsAdapter mAdapter = new IncidentsAdapter(incidentsList, ChildFragmentManager);
             Adapter1 mAdapter = new Adapter1(incidentsList);
 
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
@@ -121,6 +108,7 @@ namespace Municipal_App.Fragments
                             foreach (var item in value.DocumentChanges)
                             {
                                 var j = item.Document.ToObject<Incident>();
+
                                 switch (item.Type)
                                 {
                                     case DocumentChangeType.Added:
