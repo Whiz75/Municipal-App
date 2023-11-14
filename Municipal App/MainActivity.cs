@@ -22,36 +22,35 @@ using System;
 
 namespace Municipal_App
 {
-    [Activity(MainLauncher = false)]
+    [Activity(Theme = "@style/AppTheme", MainLauncher = false)]
     public class MainActivity : AppCompatActivity, IOnItemSelectedListener
     {
         private MaterialToolbar topAppBar;
-        private FloatingActionButton fabAddIncident;
+        
         private FloatingActionButton fabViewIncidents;
         private BottomNavigationView bottomNavigationView;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
-
-            //await FirebaseMessaging.Instance.SubscribeToTopic("Incidents");
-            CrossFirebasePushNotification.Current.Subscribe("Incidents");
-
-            CrossFirebasePushNotification.Current.OnNotificationReceived += ((s,e) =>
-            {
-                AndHUD.Shared.ShowSuccess(this, "it ran",MaskType.None,TimeSpan.FromSeconds(3));
-            });
-
-            //initiate components
-            Init();
 
             if (savedInstanceState == null)
             {
                 SupportFragmentManager.BeginTransaction().Add(Resource.Id.fragHost, new HomeFragment()).Commit();
             }
+
+            //CrossFirebasePushNotification.Current.OnNotificationReceived += ((s,e) =>
+            //{
+            //    AndHUD.Shared.ShowSuccess(this, "it ran",MaskType.None,TimeSpan.FromSeconds(3));
+            //});
+
+            //initiate components
+            Init();
+            await Xamarin.Essentials.Geolocation.GetLocationAsync();
+
 
             //if (!isGpsAvailable())
             //{
@@ -62,15 +61,11 @@ namespace Municipal_App
 
         private void Init()
         {
-            fabAddIncident = FindViewById<FloatingActionButton>(Resource.Id.fabAddIncident);
+            
             bottomNavigationView = FindViewById<BottomNavigationView>(Resource.Id.bottom_navigation);
 
             bottomNavigationView.SetOnItemSelectedListener(this);
-            fabAddIncident.Click += delegate
-            {
-                AddIncidentsTypeFragment add = new AddIncidentsTypeFragment();
-                add.Show(SupportFragmentManager.BeginTransaction(),"");
-            };
+            
         }
 
         bool IOnItemSelectedListener.OnNavigationItemSelected(IMenuItem p0)
@@ -94,29 +89,6 @@ namespace Municipal_App
                     break;
             }
             return true;
-        }
-
-        private void UserSignOut()
-        {
-            MaterialAlertDialogBuilder materialAlert = new MaterialAlertDialogBuilder(this);
-            materialAlert.SetTitle(Resources.GetString(Resource.String.sign_out_text));
-            materialAlert.SetMessage(Resources.GetString(Resource.String.sign_out_question_text));
-            materialAlert.SetPositiveButton(Resources.GetString(Resource.String.yes_text), (s, e) =>
-            {
-                var user = CrossFirebaseAuth.Current.Instance.CurrentUser;
-
-                if (user != null)
-                {
-                    materialAlert.Dispose();
-                }
-                
-            }).SetNegativeButton(Resources.GetString(Resource.String.no_text), (s, e) =>
-            {
-                materialAlert.Dispose();
-            });
-
-            materialAlert.Show();
-            
         }
 
         public bool isGpsAvailable()

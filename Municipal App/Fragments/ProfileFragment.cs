@@ -3,9 +3,12 @@ using Android.Graphics;
 using Android.OS;
 using Android.Views;
 using AndroidHUD;
+using AndroidX.AppCompat.Widget;
 using Google.Android.Material.Button;
+using Google.Android.Material.Dialog;
 using Google.Android.Material.TextField;
 using Google.Android.Material.TextView;
+using Municipal_App.Activities;
 using Municipal_App.Models;
 using Plugin.CloudFirestore;
 using Plugin.FirebaseAuth;
@@ -25,6 +28,8 @@ namespace Municipal_App.Fragments
     public class ProfileFragment : Fragment
     {
         private Context mContext;
+
+        private AppCompatImageView ImgSignOut;
         private TextInputEditText Firstname;
         private TextInputEditText Lastname;
         private TextInputEditText Email;
@@ -63,6 +68,8 @@ namespace Municipal_App.Fragments
         {
             mContext = view.Context;
 
+            ImgSignOut = view.FindViewById<AppCompatImageView>(Resource.Id.ImgSignOut);
+
             username = view.FindViewById<MaterialTextView>(Resource.Id.username);
             Firstname = view.FindViewById<TextInputEditText>(Resource.Id.InputProfileFirstName);
             Lastname = view.FindViewById<TextInputEditText>(Resource.Id.InputProfileLastName);
@@ -78,6 +85,11 @@ namespace Municipal_App.Fragments
             BtnProfileUpdate.Click += delegate
             {
                 UpdateUserInfo();
+            };
+
+            ImgSignOut.Click += delegate
+            {
+                UserSignOut();
             };
         }
 
@@ -151,6 +163,32 @@ namespace Municipal_App.Fragments
             {
                 AndHUD.Shared.ShowError(mContext, ex.Message, MaskType.None, TimeSpan.FromSeconds(3));
             }
+        }
+
+        private void UserSignOut()
+        {
+            MaterialAlertDialogBuilder materialAlert = new MaterialAlertDialogBuilder(mContext);
+            materialAlert.SetTitle(Resources.GetString(Resource.String.sign_out_text));
+            materialAlert.SetMessage(Resources.GetString(Resource.String.sign_out_question_text));
+            materialAlert.SetPositiveButton(Resources.GetString(Resource.String.yes_text), (s, e) =>
+            {
+                var user = CrossFirebaseAuth.Current.Instance.CurrentUser;
+
+                if (user != null)
+                {
+                    CrossFirebaseAuth.Current.Instance.SignOut();
+                    StartActivity(new Intent(mContext,typeof(Sign_In_Activity)));
+
+                    materialAlert.Dispose();
+                }
+
+            }).SetNegativeButton(Resources.GetString(Resource.String.no_text), (s, e) =>
+            {
+                materialAlert.Dispose();
+            });
+
+            materialAlert.Show();
+
         }
 
         private void UpdateProfileImage()

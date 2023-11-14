@@ -21,17 +21,13 @@
         app:cardBackgroundColor="@color/colorSecondary"
         >
 
-        <com.google.android.material.textview.MaterialTextView
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ImgSignOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/min_margin"
-            android:layout_marginEnd="@dimen/min_margin"
-            android:text="@string/online_text"
-            android:textStyle="bold"
-            android:textColor="@color/forest_green"
-            android:textAllCaps="true"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif-smallcaps"
+            android:layout_margin="@dimen/x_min_margin"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@drawable/icon_sign_out"
             android:layout_gravity="end"/>
 
         <LinearLayout
@@ -108,7 +104,7 @@
         app:cardCornerRadius="@dimen/min_corner_radii"
         android:layout_below="@+id/materialCardView1"
         android:layout_centerInParent="false"
-        app:cardBackgroundColor="#020024">
+        app:cardBackgroundColor="@color/colorSecondary">
 
         <LinearLayout
             android:layout_width="match_parent"

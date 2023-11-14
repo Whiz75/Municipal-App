@@ -16,6 +16,7 @@ using Google.Android.Material.TextView;
 using IO.SuperCharge.ShimmerLayoutLib;
 using Municipal_App.Activities;
 using Municipal_App.Adapters;
+using Municipal_App.Dialogs;
 using Municipal_App.Models;
 using Plugin.CloudFirestore;
 using System;
@@ -88,13 +89,21 @@ namespace Municipal_App.Fragments
         private void LoadIncidents()
         {
             List<Incident> incidentsList = new List<Incident>();
-            IncidentsAdapter mAdapter = new IncidentsAdapter(incidentsList, ChildFragmentManager);
+            //IncidentsAdapter mAdapter = new IncidentsAdapter(incidentsList, ChildFragmentManager);
+            Adapter1 mAdapter = new Adapter1(incidentsList);
 
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
             recyclerView.SetLayoutManager(layoutManager);
 
             recyclerView.HasFixedSize = true;
             recyclerView.SetAdapter(mAdapter);
+
+            mAdapter.btnClick += (s,e) =>
+            {
+                LocationDialogFragment location = new LocationDialogFragment(incidentsList[e.Position].Id,
+                    incidentsList[e.Position].Coordinates.Latitude, incidentsList[e.Position].Coordinates.Longitude);
+                location.Show(ChildFragmentManager.BeginTransaction(), "");
+            };
 
             mFrameLayout.StartShimmer();
 
@@ -119,6 +128,16 @@ namespace Municipal_App.Fragments
                                         mAdapter.NotifyDataSetChanged();
                                         break;
                                     case DocumentChangeType.Modified:
+                                        if(j.Status == "COMPLETED")
+                                        {
+                                            incidentsList.RemoveAll(x => x.Id == j.Id);
+                                        }
+                                        else
+                                        {
+                                            incidentsList[item.OldIndex] = j;
+                                        }
+
+                                        mAdapter.NotifyDataSetChanged();
                                         break;
                                     case DocumentChangeType.Removed:
                                         break;
@@ -139,5 +158,6 @@ namespace Municipal_App.Fragments
                 mFrameLayout.Visibility = ViewStates.Gone;
             }
         }
+
     }
 }
