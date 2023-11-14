@@ -106,9 +106,13 @@ namespace Municipal_App.Activities
             }
             else
             {
-
+                var loadingDialog = new IonAlert(this, IonAlert.ProgressType);
+                loadingDialog.SetSpinKit("WanderingCubes")
+                    .ShowCancelButton(false)
+                    .Show();
                 try
                 {
+
                     var auth = await CrossFirebaseAuth.
                         Current.Instance
                         .CreateUserWithEmailAndPasswordAsync(Email.Text.Trim(), Password.Text.Trim());
@@ -130,10 +134,7 @@ namespace Municipal_App.Activities
                             .Document(auth.User.Uid)
                             .SetAsync(user);
 
-                        new IonAlert(this, IonAlert.SuccessType)
-                            .SetTitleText("Good job!")
-                            .SetContentText("You clicked the button!")
-                            .Show();
+
 
                         AndHUD.
                             Shared
@@ -146,6 +147,10 @@ namespace Municipal_App.Activities
                     AndHUD.
                             Shared
                             .ShowError(Application.Context, ex.Message, MaskType.Black, TimeSpan.FromSeconds(10));
+                }
+                finally
+                {
+                    loadingDialog.Dismiss();
                 }
             }
         }

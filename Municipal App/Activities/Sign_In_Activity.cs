@@ -79,6 +79,10 @@ namespace Municipal_App.Activities
             }
             else
             {
+                var loadingDialog = new IonAlert(this, IonAlert.ProgressType);
+                loadingDialog.SetSpinKit("WanderingCubes")
+                    .ShowCancelButton(false)
+                    .Show();
                 try
                 {
                     var result = await CrossFirebaseAuth
@@ -100,6 +104,10 @@ namespace Municipal_App.Activities
                 {
                     AndHUD.Shared
                         .ShowSuccess(Application.Context, ex.Message, MaskType.Clear, TimeSpan.FromSeconds(1));
+                }
+                finally
+                {
+                    loadingDialog.Dismiss();
                 }
             }
         }

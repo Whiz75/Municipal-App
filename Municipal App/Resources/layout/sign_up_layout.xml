@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout 
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:id="@+id/RegFirstNameTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/email_txt"/>
+                android:hint="@string/firstname_txt"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textview.MaterialTextView
@@ -57,7 +57,7 @@
                 android:id="@+id/RegLastNameTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/email_txt"/>
+                android:hint="@string/Lastname_txt"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textview.MaterialTextView
@@ -95,7 +95,7 @@
                 android:id="@+id/RegPasswordTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/email_txt"/>
+                android:hint="@string/Password_txt"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textview.MaterialTextView
@@ -114,7 +114,7 @@
                 android:id="@+id/RegConfirmPasswordTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/email_txt"/>
+                android:hint="@string/confirm_password_txt"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -146,7 +146,7 @@
                 android:textColor="@color/green"
                 android:text="@string/sign_in_txt"/>
         </LinearLayout>
-         
+
     </LinearLayout>
 
 </RelativeLayout>
