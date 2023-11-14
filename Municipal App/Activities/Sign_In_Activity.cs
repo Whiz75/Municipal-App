@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.Net;
 using Android.OS;
+using Android.Runtime;
 using AndroidHUD;
 using AndroidX.AppCompat.App;
 using Google.Android.Material.Button;
@@ -11,11 +12,10 @@ using ID.IonBit.IonAlertLib;
 using Municipal_App.Dialogs;
 using Plugin.FirebaseAuth;
 using System;
-using Xamarin.Essentials;
 
 namespace Municipal_App.Activities
 {
-    [Activity(Label = "Sign_In_Activity")]
+    [Activity(Label = "Sign_In_Activity", Theme = "@style/AppTheme", MainLauncher = true)]
     public class Sign_In_Activity : AppCompatActivity
     {
         private Context context;
@@ -29,6 +29,8 @@ namespace Municipal_App.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             // Create your application here
             SetContentView(Resource.Layout.login_layout);
@@ -100,6 +102,13 @@ namespace Municipal_App.Activities
                         .ShowSuccess(Application.Context, ex.Message, MaskType.Clear, TimeSpan.FromSeconds(1));
                 }
             }
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

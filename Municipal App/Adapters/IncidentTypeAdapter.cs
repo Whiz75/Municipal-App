@@ -35,7 +35,7 @@ namespace Municipal_App.Adapters
             vh.img_edit_incident.Click += (s, e) =>
             {
                 //display the incident type
-                Toast.MakeText(mContext,incident.Id,ToastLength.Long).Show();
+                //Toast.MakeText(mContext,incident.Id,ToastLength.Long).Show();
 
                 UpdateIncidentTypeDialogFragment type = new UpdateIncidentTypeDialogFragment(incident.Id);
                 type.Show(childFragmentManager.BeginTransaction(), "");

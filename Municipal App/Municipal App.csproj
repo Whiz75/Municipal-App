@@ -71,6 +71,7 @@
     <Compile Include="Activities\Sign_In_Activity.cs" />
     <Compile Include="Activities\Sign_Up_Activity.cs" />
     <Compile Include="Activities\Splash_Screen.cs" />
+    <Compile Include="Adapters\Adapter1.cs" />
     <Compile Include="Adapters\IncidentTypeAdapter.cs" />
     <Compile Include="Adapters\IncidentsAdapter.cs" />
     <Compile Include="Dialogs\AddIncidentsTypeFragment.cs" />

@@ -47,7 +47,6 @@ namespace Municipal_App.Dialogs
 
             mContext = view.Context;
             Init(view);
-            LoadIncidentTypes();
 
             return view;
         }
@@ -81,9 +80,7 @@ namespace Municipal_App.Dialogs
 
         private async void AddIncidentsAsync()
         {
-            try
-            {
-
+           
                 if (string.IsNullOrEmpty(AddIncidentTypeTextInput.Text.Trim()))
                 {
                     AndHUD.Shared.ShowError(mContext, "Incident field can not be empty", MaskType.None, TimeSpan.FromSeconds(1));
@@ -95,51 +92,39 @@ namespace Municipal_App.Dialogs
                         IncidentsName = AddIncidentTypeTextInput.Text
                     };
 
-                    var result = await CrossCloudFirestore
+                    try
+                    {
+                        var result = await CrossCloudFirestore
                         .Current
                          .Instance
                          .Collection(nameof(IncidentType))
                          .AddAsync(type);
 
-                    AndHUD.Shared.ShowSuccess(mContext, "Incident was added successfully", MaskType.None, TimeSpan.FromSeconds(1));
-                    AddIncidentTypeTextInput.Text = "";
+                        AndHUD.Shared.ShowSuccess(mContext, "Incident was added successfully", MaskType.None, TimeSpan.FromSeconds(1));
+                        AddIncidentTypeTextInput.Text = "";
 
-                    if (result != null)
-                    {
-                        IncidentType id = new IncidentType()
-                        {
-                            Id = result.Id
-                        };
+                        //if (result != null)
+                        //{
+                        //    IncidentType id = new IncidentType()
+                        //    {
+                        //        Id = result.Id
+                        //    };
 
-                        await CrossCloudFirestore.Current
-                         .Instance
-                         .Collection(nameof(IncidentType))
-                         .Document(result.Id)
-                         .UpdateAsync(id);
+                        //    await CrossCloudFirestore.Current
+                        //     .Instance
+                        //     .Collection(nameof(IncidentType))
+                        //     .Document(result.Id)
+                        //     .UpdateAsync(id);
+                        //}
                     }
+                    catch (Exception ex)
+                    {
+                        AndHUD.
+                          Shared
+                          .ShowError(mContext, ex.Message, MaskType.Black, TimeSpan.FromSeconds(10));
+                    }
+                    
                 }
-
-            }catch (Exception ex)
-            {
-                AndHUD.
-                      Shared
-                      .ShowError(mContext, ex.Message, MaskType.Black, TimeSpan.FromSeconds(10));
-            }
-        }
-
-        private async void LoadIncidentTypes()
-        {
-            var group = await CrossCloudFirestore.Current
-                                     .Instance
-                                     .CollectionGroup("IncidentType")
-                                     .GetAsync();
-
-            if (!group.IsEmpty)
-            {
-                var yourModels = group.ToObjects<IncidentType>();
-
-                AndHUD.Shared.ShowSuccess(mContext, yourModels.ToString(), MaskType.None, TimeSpan.FromSeconds(5));
-            }
         }
     }
 }

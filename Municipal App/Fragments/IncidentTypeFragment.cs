@@ -11,6 +11,8 @@ using RecyclerView = AndroidX.RecyclerView.Widget.RecyclerView;
 using Android.Content;
 using LinearLayoutManager = AndroidX.RecyclerView.Widget.LinearLayoutManager;
 using Google.Android.Material.TextView;
+using Google.Android.Material.FloatingActionButton;
+using Municipal_App.Dialogs;
 
 namespace Municipal_App.Fragments
 {
@@ -19,6 +21,7 @@ namespace Municipal_App.Fragments
         Context mContext;
         private List<IncidentType> incidentTypeList;
 
+        private FloatingActionButton fabAddIncident;
         private MaterialTextView noOfIncidentType;
         private RecyclerView incidentTypeRecyclerView;
 
@@ -43,8 +46,15 @@ namespace Municipal_App.Fragments
         {
             mContext = v.Context;
 
+            fabAddIncident = v.FindViewById<FloatingActionButton>(Resource.Id.fabAddIncident);
             noOfIncidentType = v.FindViewById<MaterialTextView>(Resource.Id.noOfIncidentType);
             incidentTypeRecyclerView = v.FindViewById<RecyclerView>(Resource.Id.incidentTypeRecyclerView);
+
+            fabAddIncident.Click += delegate
+            {
+                AddIncidentsTypeFragment add = new AddIncidentsTypeFragment();
+                add.Show(ChildFragmentManager.BeginTransaction(), "");
+            };
         }
 
         private void LoadIncidentType()

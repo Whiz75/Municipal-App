@@ -65,21 +65,6 @@ namespace Municipal_App.Dialogs
         {
             base.OnStart();
             Dialog.Window.SetLayout(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
-
-            try
-            {
-                // Calculate the screen height
-                int screenHeight = Resources.DisplayMetrics.HeightPixels;
-
-                // Create a TranslateAnimation that moves the view from the bottom to the top
-                TranslateAnimation slideAnimation = new TranslateAnimation(0, 0, screenHeight, 0);
-                slideAnimation.Duration = 2000; // Duration of the animation in milliseconds
-                bottomSheetCardview1.StartAnimation(slideAnimation); // Start the animation
-            }
-            catch (Exception ex)
-            {
-                AndHUD.Shared.ShowError(context, ex.Message, MaskType.Black, TimeSpan.FromSeconds(2));
-            }
         }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -137,6 +122,21 @@ namespace Municipal_App.Dialogs
 
                 bottomSheetCardview1.Visibility = ViewStates.Gone;
             };
+
+            try
+            {
+                // Calculate the screen height
+                int screenHeight = Resources.DisplayMetrics.HeightPixels;
+
+                // Create a TranslateAnimation that moves the view from the bottom to the top
+                TranslateAnimation slideAnimation = new TranslateAnimation(0, 0, screenHeight, 0);
+                slideAnimation.Duration = 2000; // Duration of the animation in milliseconds
+                bottomSheetCardview1.StartAnimation(slideAnimation); // Start the animation
+            }
+            catch (Exception ex)
+            {
+                AndHUD.Shared.ShowError(context, ex.Message, MaskType.Black, TimeSpan.FromSeconds(4));
+            }
         }
 
         private void ChangeStatus()
@@ -151,7 +151,7 @@ namespace Municipal_App.Dialogs
                     {
                         if (error != null)
                         {
-                            AndHUD.Shared.ShowError(context, error.Message, MaskType.Black, TimeSpan.FromSeconds(2));
+                            AndHUD.Shared.ShowError(context, "ChangeStatus " + error.Message, MaskType.Black, TimeSpan.FromSeconds(4)) ;
                             return;
                         }
 
@@ -164,7 +164,7 @@ namespace Municipal_App.Dialogs
             }
             catch (Exception ex)
             {
-                AndHUD.Shared.ShowError(context, ex.Message, MaskType.Black, TimeSpan.FromSeconds(2));
+                AndHUD.Shared.ShowError(context, "ChangeStatus " + ex.Message, MaskType.Black, TimeSpan.FromSeconds(4));
             }
         }
 
@@ -261,7 +261,7 @@ namespace Municipal_App.Dialogs
                     }
                     catch (Exception ex)
                     {
-                        Toast.MakeText(context, ex.Message, ToastLength.Long).Show();
+                        Toast.MakeText(context, "OnMapReady " + ex.Message, ToastLength.Long).Show();
                     }
 
                     await GetRoute(current, dest);
@@ -269,7 +269,7 @@ namespace Municipal_App.Dialogs
             }
             catch (Exception ex)
             {
-                AndHUD.Shared.ShowError(context, ex.Message, MaskType.None, TimeSpan.FromSeconds(3));
+                AndHUD.Shared.ShowError(context, "OnMapReady " + ex.Message, MaskType.None, TimeSpan.FromSeconds(3));
             }
         }
 
@@ -361,7 +361,7 @@ namespace Municipal_App.Dialogs
             }
             catch (Exception ex)
             {
-                AndHUD.Shared.ShowError(context, ex.Message, MaskType.Black, TimeSpan.FromSeconds(5));
+                AndHUD.Shared.ShowError(context, "GetRoute " + ex.Message, MaskType.Black, TimeSpan.FromSeconds(5));
             }
 
         }
@@ -449,23 +449,12 @@ namespace Municipal_App.Dialogs
                                         .BuildRound($"{user.FirstName.Substring(0, 1)}{user.LastName.Substring(0, 1)}", Color.DeepSkyBlue);
                                     user_image_or_text_drawable.SetImageDrawable(drawable1);
                                 }
-
-
-                                //if (!string.IsNullOrEmpty(user.Url))
-                                //{
-                                //}
-                                //else
-                                //{
-                                //    // If no URL is available
-                                //    // create a TextDrawable using the first letter of the user's first name
-                                //}
-
                             }
                         });
                     }
                     catch (Exception ex)
                     {
-                        AndHUD.Shared.ShowError(context, ex.Message, MaskType.None, TimeSpan.FromSeconds(2));
+                        AndHUD.Shared.ShowError(context, "GetUserInfo " + ex.Message, MaskType.None, TimeSpan.FromSeconds(2));
                     }
                 }
 
