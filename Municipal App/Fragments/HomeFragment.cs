@@ -116,16 +116,30 @@ namespace Municipal_App.Fragments
                                         mAdapter.NotifyDataSetChanged();
                                         break;
                                     case DocumentChangeType.Modified:
-                                        if(j.Status == "COMPLETED")
+
+                                        if(string.Equals(j.Status, "COMPLETED"))
                                         {
-                                            incidentsList.RemoveAll(x => x.Id == j.Id);
+                                            //incidentsList.RemoveAll(x => x.Id == j.Id);
+                                            // Remove the completed incident
+                                            var indexToRemove = incidentsList.FindIndex(x => x.Id == j.Id);
+                                            if (indexToRemove != -1)
+                                            {
+                                                incidentsList.RemoveAt(indexToRemove);
+                                            }
                                         }
                                         else
                                         {
-                                            incidentsList[item.OldIndex] = j;
+                                            //incidentsList[item.OldIndex] = j;
+                                            // Update the existing incident
+                                            var indexToUpdate = incidentsList.FindIndex(x => x.Id == j.Id);
+                                            if (indexToUpdate != -1)
+                                            {
+                                                incidentsList[indexToUpdate] = j;
+                                            }
                                         }
 
                                         mAdapter.NotifyDataSetChanged();
+
                                         break;
                                     case DocumentChangeType.Removed:
                                         break;
