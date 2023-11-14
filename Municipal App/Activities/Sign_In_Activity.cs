@@ -86,9 +86,9 @@ namespace Municipal_App.Activities
                 try
                 {
                     var result = await CrossFirebaseAuth
-                    .Current
-                    .Instance
-                    .SignInWithEmailAndPasswordAsync(InputLoginEmail.Text, InputLoginPassword.Text);
+                        .Current
+                        .Instance
+                        .SignInWithEmailAndPasswordAsync(InputLoginEmail.Text, InputLoginPassword.Text);
 
                     if (result.User != null)
                     {
@@ -100,10 +100,10 @@ namespace Municipal_App.Activities
                         StartActivity(new Intent(Application.Context, typeof(MainActivity)));
                     }
                 }
-                catch (Exception ex)
+                catch (FirebaseAuthException ex)
                 {
                     AndHUD.Shared
-                        .ShowSuccess(Application.Context, ex.Message, MaskType.Clear, TimeSpan.FromSeconds(1));
+                        .ShowSuccess(this, ex.Message, MaskType.Clear, TimeSpan.FromSeconds(5));
                 }
                 finally
                 {

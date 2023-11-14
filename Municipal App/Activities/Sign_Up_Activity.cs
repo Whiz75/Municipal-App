@@ -133,9 +133,7 @@ namespace Municipal_App.Activities
                             .Collection("USERS")
                             .Document(auth.User.Uid)
                             .SetAsync(user);
-
                         StartActivity(new Intent(Application.Context, typeof(MainActivity)));
-
                         AndHUD.
                             Shared
                             .ShowSuccess(Application.Context, "Your account has been successfully created!!!", MaskType.Black, TimeSpan.FromSeconds(10));
