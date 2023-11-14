@@ -134,7 +134,7 @@ namespace Municipal_App.Activities
                             .Document(auth.User.Uid)
                             .SetAsync(user);
 
-
+                        StartActivity(new Intent(Application.Context, typeof(MainActivity)));
 
                         AndHUD.
                             Shared
@@ -142,7 +142,7 @@ namespace Municipal_App.Activities
                     }
 
                 }
-                catch (Exception ex)
+                catch (FirebaseAuthException ex)
                 {
                     AndHUD.
                             Shared
