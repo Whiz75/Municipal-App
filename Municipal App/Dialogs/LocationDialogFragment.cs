@@ -13,18 +13,16 @@ using AndroidHUD;
 using AndroidX.AppCompat.Widget;
 using AndroidX.CardView.Widget;
 using Google.Android.Material.Button;
-using Google.Android.Material.TextField;
 using Google.Android.Material.TextView;
+using ID.IonBit.IonAlertLib;
 using Municipal_App.Models;
 using OSRMLib.OSRMServices;
 using Plugin.CloudFirestore;
-using Square.Picasso;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using XamarinTextDrawable;
-using XamarinTextDrawable.Util;
 using DialogFragment = AndroidX.Fragment.App.DialogFragment;
 using User = Municipal_App.Models.User;
 
@@ -219,6 +217,11 @@ namespace Municipal_App.Dialogs
 
         public async void OnMapReady(GoogleMap googleMap)
         {
+            var loadingDialog = new IonAlert(context, IonAlert.ProgressType);
+            loadingDialog.SetSpinKit("WanderingCubes")
+                .ShowCancelButton(false)
+                .Show();
+
             this.googleMap = googleMap;
             try
             {
@@ -261,7 +264,7 @@ namespace Municipal_App.Dialogs
                     }
                     catch (Exception ex)
                     {
-                        Toast.MakeText(context, "OnMapReady " + ex.Message, ToastLength.Long).Show();
+                        Toast.MakeText(context, ex.Message, ToastLength.Long).Show();
                     }
 
                     await GetRoute(current, dest);
@@ -269,7 +272,11 @@ namespace Municipal_App.Dialogs
             }
             catch (Exception ex)
             {
-                AndHUD.Shared.ShowError(context, "OnMapReady " + ex.Message, MaskType.None, TimeSpan.FromSeconds(3));
+                AndHUD.Shared.ShowError(context,ex.Message, MaskType.None, TimeSpan.FromSeconds(3));
+            }
+            finally
+            {
+                loadingDialog.Dismiss();
             }
         }
 

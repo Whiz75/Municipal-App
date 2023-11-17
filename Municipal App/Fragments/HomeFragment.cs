@@ -112,8 +112,10 @@ namespace Municipal_App.Fragments
                                 switch (item.Type)
                                 {
                                     case DocumentChangeType.Added:
+
                                         incidentsList.Add(j);
                                         mAdapter.NotifyDataSetChanged();
+
                                         break;
                                     case DocumentChangeType.Modified:
 
@@ -139,9 +141,16 @@ namespace Municipal_App.Fragments
                                         }
 
                                         mAdapter.NotifyDataSetChanged();
-
                                         break;
                                     case DocumentChangeType.Removed:
+
+                                        // Remove the incident from the list when it's removed
+                                        var indexToRemove1 = incidentsList.FindIndex(x => x.Id == j.Id);
+                                        if (indexToRemove1 != -1)
+                                        {
+                                            incidentsList.RemoveAt(indexToRemove1);
+                                        }
+                                        mAdapter.NotifyDataSetChanged();
                                         break;
                                 }
                             }
