@@ -8,6 +8,7 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView1"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="@dimen/x_min_margin"
@@ -21,7 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/min_margin"
             android:text="No. of incident types"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_gravity="center_vertical"/>
+
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -30,14 +33,14 @@
         android:layout_height="wrap_content"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddIncident"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_input_add"
-        android:contentDescription="@string/add_comment_txt"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        style="?attr/floatingActionButtonSmallStyle"/>
+            android:id="@+id/fabAddIncident"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@android:drawable/ic_input_add"
+            android:contentDescription="@string/add_comment_txt"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            style="?attr/floatingActionButtonSmallStyle"/>
 </RelativeLayout>

@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:text="@string/common_signin_button_text"
             android:textStyle="bold"
-            android:textSize="20sp"
-            android:fontFamily="casual"
+            android:textSize="24sp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textAllCaps="true"/>
 
         <com.google.android.material.textview.MaterialTextView

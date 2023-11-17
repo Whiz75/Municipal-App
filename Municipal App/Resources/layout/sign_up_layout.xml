@@ -18,10 +18,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/min_margin"
             android:text="@string/sign_up_txt"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:fontFamily="casual"
-            android:textAllCaps="true"/>
+            android:textAllCaps="true"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
