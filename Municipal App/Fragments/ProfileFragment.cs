@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Views;
 using AndroidHUD;
 using AndroidX.AppCompat.Widget;
+using Firebase.Firestore.Auth;
 using Google.Android.Material.Button;
 using Google.Android.Material.Dialog;
 using Google.Android.Material.TextField;
@@ -22,6 +23,7 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using XamarinTextDrawable;
 using Fragment = AndroidX.Fragment.App.Fragment;
+using User = Municipal_App.Models.User;
 
 namespace Municipal_App.Fragments
 {
@@ -37,7 +39,7 @@ namespace Municipal_App.Fragments
         private MaterialTextView username;
         private MaterialTextView date;
         private MaterialTextView role;
-        private CircleImageView user_picture;
+        private AppCompatImageView user_picture;
 
         private MaterialButton BtnProfileUpdate;
         private FileResult file;
@@ -78,7 +80,7 @@ namespace Municipal_App.Fragments
             role = view.FindViewById<MaterialTextView>(Resource.Id.TextViewProfileRole);
             ET_Role = view.FindViewById<TextInputEditText>(Resource.Id.InputProfileRole);
 
-            user_picture = view.FindViewById<CircleImageView>(Resource.Id.user_picture);
+            user_picture = view.FindViewById<AppCompatImageView>(Resource.Id.user_picture);
 
             BtnProfileUpdate = view.FindViewById<MaterialButton>(Resource.Id.BtnProfileUpdate);
 
@@ -127,9 +129,12 @@ namespace Municipal_App.Fragments
                         }
                         else
                         {
-                            //TextDrawable drawable1 = new TextDrawable.Builder()
-                            //.BuildRound($"{user.FirstName.Substring(0, 1)}{user.LastName.Substring(0, 1)}", Color.DeepSkyBlue);
-                            //user_picture.SetImageDrawable(drawable1);
+                            if(!(string.IsNullOrEmpty(user.FirstName) || string.IsNullOrEmpty(user.LastName)))
+                            {
+                                TextDrawable drawable1 = new TextDrawable.Builder()
+                                .BuildRound($"{GetInitials(user.FirstName.Substring(0, 1).ToUpper())}{user.LastName.Substring(0, 1).ToUpper()}", Color.DeepSkyBlue);
+                                user_picture.SetImageDrawable(drawable1);
+                            }
                         }
                     }
                 });
@@ -138,6 +143,11 @@ namespace Municipal_App.Fragments
             {
                 AndHUD.Shared.ShowError(mContext, ex.Message, MaskType.None, TimeSpan.FromSeconds(3));      
             }
+        }
+
+        private string GetInitials(string str)
+        {
+            return str.Substring(0, 1).ToUpper();
         }
 
         private async void UpdateUserInfo()

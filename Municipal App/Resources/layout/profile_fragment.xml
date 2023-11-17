@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="5dp"
     android:paddingTop="5dp"
     android:gravity="center_vertical">
 
@@ -35,22 +34,35 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Refractored.Controls.CircleImageView
-                android:id="@+id/user_picture"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                tools:src="@drawable/icon_user"
-                app:civ_border_width="2dp"
-                app:civ_border_color="@color/gray" />
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/user_picture"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="@dimen/x_min_margin"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_user"
+                    app:layout_anchorGravity="bottom|center"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/editProfileImage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_edit"
+                    app:layout_anchor="@+id/user_picture"
+                    app:layout_anchorGravity="right|bottom"/>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                >
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/username"
@@ -62,16 +74,14 @@
                     android:textColor="@color/white_smoke"
                     android:textStyle="bold"
                     android:textSize="24sp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    app:layout_constraintStart_toEndOf="@+id/postProfilePic"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/TextViewProfileRole"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/medium_margin"
+                    android:layout_marginStart="@dimen/min_margin"
                     android:text="@string/role_txt"
                     android:textSize="16sp"
                     android:textAllCaps="true"
@@ -83,15 +93,17 @@
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/medium_margin"
+                    android:layout_marginStart="@dimen/min_margin"
                     android:text="@string/date_txt"
                     android:textSize="12sp"
                     android:textColor="@color/white_smoke"
-                    android:fontFamily="sans-serif-smallcaps"
-                    app:layout_constraintStart_toEndOf="@+id/postProfilePic"
-                    android:accessibilityHeading="@+id/postUsername" />
+                    android:fontFamily="sans-serif-smallcaps" />
             </LinearLayout>
         </LinearLayout>
+
+        
+
+        
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -111,8 +123,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/min_margin"
             android:orientation="vertical">
-
-
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
@@ -194,7 +204,6 @@
                 android:layout_gravity="end"
                 android:text="update"
                 style="@style/ThemeOverlay.Material3.Button.ElevatedButton"/>
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

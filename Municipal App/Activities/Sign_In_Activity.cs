@@ -3,6 +3,7 @@ using Android.Content;
 using Android.Net;
 using Android.OS;
 using Android.Runtime;
+using Android.Views;
 using AndroidHUD;
 using AndroidX.AppCompat.App;
 using Google.Android.Material.Button;
@@ -22,6 +23,7 @@ namespace Municipal_App.Activities
         private TextInputEditText InputLoginEmail;
         private TextInputEditText InputLoginPassword;
         private MaterialTextView TextViewLoginSignUp;
+        private MaterialTextView TextViewResetPassword;
 
         private MaterialButton BtnLogin;
         private MaterialButton BtnLoginSignUp;
@@ -50,6 +52,7 @@ namespace Municipal_App.Activities
 
             BtnLogin = FindViewById<MaterialButton>(Resource.Id.BtnSignIn);
             TextViewLoginSignUp = FindViewById<MaterialTextView>(Resource.Id.TextViewLoginSignUp);
+            TextViewResetPassword = FindViewById<MaterialTextView>(Resource.Id.TextViewResetPassword);
 
             BtnLogin.Click += delegate
             {
@@ -59,6 +62,12 @@ namespace Municipal_App.Activities
             TextViewLoginSignUp.Click += delegate
             {
                 StartActivity(new Intent(Application.Context, typeof(Sign_Up_Activity)));
+            };
+
+            TextViewResetPassword.Click += delegate
+            {
+                ResetPasswordFragment reset = new ResetPasswordFragment();
+                reset.Show(SupportFragmentManager.BeginTransaction(), "");
             };
         }
 
@@ -98,7 +107,7 @@ namespace Municipal_App.Activities
                                 .Show();
 
                         StartActivity(new Intent(Application.Context, typeof(MainActivity)));
-                    }
+                    } 
                 }
                 catch (FirebaseAuthException ex)
                 {
