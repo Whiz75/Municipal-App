@@ -132,7 +132,7 @@ namespace Municipal_App.Fragments
                             if(!(string.IsNullOrEmpty(user.FirstName) || string.IsNullOrEmpty(user.LastName)))
                             {
                                 TextDrawable drawable1 = new TextDrawable.Builder()
-                                .BuildRound($"{GetInitials(user.FirstName.Substring(0, 1).ToUpper())}{user.LastName.Substring(0, 1).ToUpper()}", Color.DeepSkyBlue);
+                                .BuildRound($"{GetInitials(user.FirstName.Substring(0,1).ToUpper())}{user.LastName.Substring(0,1).ToUpper()}", Color.DeepSkyBlue);
                                 user_picture.SetImageDrawable(drawable1);
                             }
                         }

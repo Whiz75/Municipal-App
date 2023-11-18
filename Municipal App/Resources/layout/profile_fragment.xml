@@ -202,7 +202,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:layout_gravity="end"
-                android:text="update"
+                android:text="UPDATE"
                 style="@style/ThemeOverlay.Material3.Button.ElevatedButton"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
