@@ -1,22 +1,14 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
-using Android.Widget;
 using AndroidHUD;
 using AndroidX.AppCompat.Widget;
-using AndroidX.Fragment.App;
 using Google.Android.Material.Button;
 using Google.Android.Material.TextField;
 using ID.IonBit.IonAlertLib;
-using Plugin.CloudFirestore;
 using Plugin.FirebaseAuth;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using DialogFragment = AndroidX.Fragment.App.DialogFragment;
 
@@ -55,6 +47,8 @@ namespace Municipal_App.Dialogs
 
         private void Init(View view)
         {
+            mContext = view.Context;
+
             img_cancel = view.FindViewById<AppCompatImageView>(Resource.Id.img_cancel);
 
             email_txt = view.FindViewById<TextInputEditText>(Resource.Id.emailResetInput);
@@ -82,9 +76,13 @@ namespace Municipal_App.Dialogs
             }
             else
             {
+                var loadingDialog = new IonAlert(mContext, IonAlert.SuccessType);
+                loadingDialog.SetTitleText("Success");
+                loadingDialog.SetContentText("Email was successfully sent")
+                .Show();
+
                 try
                 {
-                    //await CrossFirebaseAuth.Current.Instance.CurrentUser.UpdatePasswordAsync(email_txt.Text.Trim());
                     await CrossFirebaseAuth.Current.Instance.SendPasswordResetEmailAsync(email_txt.Text.Trim());
                 }
                 catch (Exception ex)
@@ -93,7 +91,8 @@ namespace Municipal_App.Dialogs
                 }
                 finally
                 {
-                    Dialog.Dispose();
+                    loadingDialog.Dismiss();
+                    Dialog.Dismiss();
                 }
                 
             }

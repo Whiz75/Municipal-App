@@ -1,9 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Net;
 using Android.OS;
 using Android.Runtime;
-using Android.Views;
 using AndroidHUD;
 using AndroidX.AppCompat.App;
 using Google.Android.Material.Button;

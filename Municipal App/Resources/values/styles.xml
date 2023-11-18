@@ -13,8 +13,12 @@
 		<item name="android:windowFullscreen">true</item>
 		<item name="android:windowContentOverlay">@null</item>
 		<item name="android:windowActionBar">false</item>
-		<item name="android:windowSplashScreenAnimatedIcon">@mipmap/logo</item>
+		<!--<item name="android:windowSplashScreenAnimatedIcon">@mipmap/logo</item>-->
+		<item name="android:windowSplashScreenBrandingImage">@mipmap/logo</item>
+		<item name="android:windowSplashScreenIconBackgroundColor">#004d28</item>
+		<!--<item name="android:windowSplashScreenAnimatedIcon">@drawable/your_animated_image</item>-->
 		<item name="android:windowSplashScreenBackground">@color/colorPrimaryDark</item>
+		<item name="android:windowSplashScreenAnimationDuration">800</item>
 	</style>
 
 </resources>
